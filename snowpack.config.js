@@ -1,23 +1,23 @@
-// Snowpack Configuration File
-// See all supported options: https://www.snowpack.dev/reference/configuration
-
-/** @type {import("snowpack").SnowpackUserConfig } */
 module.exports = {
   mount: {
     lib: {
       url: '/lib',
     }
   },
-  plugins: [
-    /* ... */
-  ],
+  optimize: {
+    bundle: true,
+    minify: true,
+    treeshake: true,
+    entrypoints: ['./lib/mapp.mjs'],
+  },
   packageOptions: {
     source: 'local',
   },
-  devOptions: {
-    /* ... */
-  },
   buildOptions: {
-    /*out: './public/js/snowpack',*/
+    clean: false,
+    out: './public/js',
   },
-};
+  devOptions: {
+    open: 'none',
+  }
+}
