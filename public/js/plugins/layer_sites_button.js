@@ -3,7 +3,7 @@ document.dispatchEvent(new CustomEvent('layer_sites_button', {
 
     _xyz.layers.plugins.layer_sites_button = layer => {
 
-      document.getElementById('mapButton').appendChild(_xyz.utils.html.node`
+      document.getElementById('mapButton').appendChild(mapp.utils.html.node`
       <button
       class="mobile-display-none"
         title="Add sites point"

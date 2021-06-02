@@ -3,7 +3,7 @@ document.dispatchEvent(new CustomEvent('bring_layer_to_front', {
 
     _xyz.layers.plugins.bring_layer_to_front = layer => {
 
-      layer.view.appendChild(_xyz.utils.html.node`
+      layer.view.appendChild(mapp.utils.html.node`
       <div style="padding-right: 5px">
       <button 
         title=${_xyz.language.layer_style_bring_to_front}

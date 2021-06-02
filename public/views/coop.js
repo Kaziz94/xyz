@@ -139,7 +139,7 @@ function init(_xyz) {
         });
 
         // create LSOA checkbox
-        document.getElementById('map-toggles').appendChild(_xyz.utils.html.node `
+        document.getElementById('map-toggles').appendChild(mapp.utils.html.node `
       <label class="input-checkbox">
       <input type="checkbox" onchange=${
         e => e.target.checked ? _xyz.layers.list["LSOA"].show() : _xyz.layers.list["LSOA"].remove()
@@ -162,12 +162,12 @@ function init(_xyz) {
             drop.classList.toggle('active');
             layer_wellbeing.style.theme = theme[1];
             legend.innerHTML = '';
-            legend.appendChild(_xyz.utils.html.node `<div>${theme[0]}`)
+            legend.appendChild(mapp.utils.html.node `<div>${theme[0]}`)
             legend.appendChild(_xyz.layers.view.style.legend(layer_wellbeing));
             layer_wellbeing.reload();
         }
 
-        document.getElementById('Themes').appendChild(_xyz.utils.html.node `
+        document.getElementById('Themes').appendChild(mapp.utils.html.node `
       <button class="btn-drop">
       <div
       class="head"
@@ -177,7 +177,7 @@ function init(_xyz) {
       <div class="icon"></div>
       </div>
       <ul>
-      ${Object.entries(layer_wellbeing.style.themes).map(theme => _xyz.utils.html.node`
+      ${Object.entries(layer_wellbeing.style.themes).map(theme => mapp.utils.html.node`
         <li onclick=${e => themeSelect(e, theme)} ontouchend=${e => themeSelect(e, theme)}
         >${theme[0]}`)}`);
 
@@ -196,7 +196,7 @@ function init(_xyz) {
             e.target.parentElement.classList.add('active');
         }
 
-        document.getElementById('Regions').appendChild(_xyz.utils.html.node `
+        document.getElementById('Regions').appendChild(mapp.utils.html.node `
       <button class="btn-drop">
       <div
       class="head"
@@ -218,7 +218,7 @@ function init(_xyz) {
         "Wales",
         "West Midlands",
         "Yorkshire and The Humber"
-        ].map(region => _xyz.utils.html.node`
+        ].map(region => mapp.utils.html.node`
           <li onclick=${e => {
 
             _xyz.map.getOverlays().getArray().map(overlay => _xyz.map.removeOverlay(overlay));
@@ -265,7 +265,7 @@ function init(_xyz) {
 
             xhr.onload = e => {
 
-                document.getElementById('Constituencies').appendChild(_xyz.utils.html.node `
+                document.getElementById('Constituencies').appendChild(mapp.utils.html.node `
           <div><button class="btn-drop">
           <div
           class="head"
@@ -276,7 +276,7 @@ function init(_xyz) {
           <span>Select Constituency</span>
           <div class="icon"></div></div>
           <ul>
-          ${Object.values(e.target.response).map(constituency => _xyz.utils.html.node`
+          ${Object.values(e.target.response).map(constituency => mapp.utils.html.node`
             <li onclick=${e => {
 
               console.log(constituency);
@@ -337,7 +337,7 @@ function init(_xyz) {
             xhr.responseType = 'json';
             xhr.onload = e => {
 
-                document.getElementById('Lads').appendChild(_xyz.utils.html.node `
+                document.getElementById('Lads').appendChild(mapp.utils.html.node `
           <div><button class="btn-drop">
           <div class="head"
           onclick=${e => {
@@ -348,7 +348,7 @@ function init(_xyz) {
           <div class="icon"></div>
           </div>
           <ul>
-          ${Object.values(e.target.response).map(lad => _xyz.utils.html.node`
+          ${Object.values(e.target.response).map(lad => mapp.utils.html.node`
             <li onclick=${e => {
 
               _xyz.map.getOverlays().getArray().map(overlay => _xyz.map.removeOverlay(overlay));

@@ -153,22 +153,26 @@
       "layers": {
         "Mapbox Base": {
           "template": "Mapbox Base",
-          "display": true
+          "display": true,
+          "group": "Base"
         },
         "HERE Imagery": {
           "template": "HERE Imagery",
+          "group": "Base",
           "roles": {
             "de": null
           }
         },
         "HERE Hybrid": {
           "template": "HERE Hybrid",
+          "group": "Base",
           "roles": {
             "en": true
           }
         },
         "Mapbox Label": {
-          "template": "Mapbox Label"
+          "template": "Mapbox Label",
+          "group": "Base"
         },
         "ZoomGeom": {
           "format": "mvt",

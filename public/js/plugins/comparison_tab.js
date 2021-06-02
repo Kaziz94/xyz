@@ -49,12 +49,12 @@ document.dispatchEvent(new CustomEvent('comparison_tab', {
         'e-Withdrawn'
       ]
 
-      const target = _xyz.utils.html.node`
+      const target = mapp.utils.html.node`
       <div
         style="
           display:grid;
           grid-template-columns: 240px repeat( auto-fit, minmax(0, 1fr) );
-          padding: 20px;">${labels.map((label, i) => _xyz.utils.html`
+          padding: 20px;">${labels.map((label, i) => mapp.utils.html`
             <div
               style="${`
                 grid-column:1;

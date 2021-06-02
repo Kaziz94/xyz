@@ -24,19 +24,19 @@ document.dispatchEvent(new CustomEvent('scenario_panel', {
 
       const scenarios = {}
 
-      const drawer = layer.view.insertBefore(_xyz.utils.html.node`
+      const drawer = layer.view.insertBefore(mapp.utils.html.node`
         <div class="drawer panel expandable">
           <div
             class="header primary-colour"
             onclick=${e => {
               e.stopPropagation()
-              _xyz.utils.toggleExpanderParent(e.target, true)
+              mapp.ui.toggleExpanderParent(e.target, true)
             }}>
             <span>Scenario</span>
             <button class="btn-header xyz-icon icon-expander primary-colour-filter">`,
             layer.view.querySelector('.drawer'))
 
-      drawer.appendChild(_xyz.utils.html.node`
+      drawer.appendChild(mapp.utils.html.node`
         <button
           class="btn-wide primary-colour"
           onclick=${e => {
@@ -48,7 +48,7 @@ document.dispatchEvent(new CustomEvent('scenario_panel', {
             loadScenario()
           }}>New Scenario`)
 
-      document.getElementById('mapButton').appendChild(_xyz.utils.html.node`
+      document.getElementById('mapButton').appendChild(mapp.utils.html.node`
         <button
           title="Create New Locale Scenario"
           onclick=${e => {
@@ -62,10 +62,10 @@ document.dispatchEvent(new CustomEvent('scenario_panel', {
           <div class="xyz-icon icon-add-chart">`)
 
       const selector = layer.view.insertBefore(
-        _xyz.utils.html.node`<div style="padding: 5px">`,
+        mapp.utils.html.node`<div style="padding: 5px">`,
         layer.view.querySelector('.drawer'))          
 
-      scenarios.panel = drawer.appendChild(_xyz.utils.html.node`
+      scenarios.panel = drawer.appendChild(mapp.utils.html.node`
         <div style="padding-right: 5px; margin-bottom: 5px;">`)
         
       scenarios.demands = await _xyz.query({
@@ -73,41 +73,41 @@ document.dispatchEvent(new CustomEvent('scenario_panel', {
       })
 
       scenarios.fields = {
-        scenario_id: value => scenarios.grid.appendChild(_xyz.utils.html.node`
+        scenario_id: value => scenarios.grid.appendChild(mapp.utils.html.node`
           <div style="grid-column: 1">ID</div>
           <div style="grid-column: 2">${value}
-          ${!scenarios.current.locked && _xyz.utils.html`
+          ${!scenarios.current.locked && mapp.utils.html`
             <button onclick=${deleteScenario} style="color: red; float: right;">DELETE` || ''}`),
-        scenario_name: value => scenarios.grid.appendChild(_xyz.utils.html.node`
+        scenario_name: value => scenarios.grid.appendChild(mapp.utils.html.node`
           <div style="grid-column: 1">Name</div>
           <div style="grid-column: 2">
             <input type="text" .disabled=${scenarios.current.locked == 1}
               oninput=${e => onInput(e, 'scenario_name')} value=${value}>`),
-        cap_main: value => scenarios.grid.appendChild(_xyz.utils.html.node`
+        cap_main: value => scenarios.grid.appendChild(mapp.utils.html.node`
           <div style="grid-column: 1">Cap</div>
           <div style="grid-column: 2">
             <input type="number" .disabled=${scenarios.current.locked == 1}
               oninput=${e => onInput(e, 'cap_main')} value=${value}>`),
-        collar_main: value => scenarios.grid.appendChild(_xyz.utils.html.node`
+        collar_main: value => scenarios.grid.appendChild(mapp.utils.html.node`
           <div style="grid-column: 1">Collar</div>
           <div style="grid-column: 2">
             <input type="number" .disabled=${scenarios.current.locked == 1}
               oninput=${e => onInput(e, 'collar_main')} value=${value}>`),
-        created_by: value => scenarios.grid.appendChild(_xyz.utils.html.node`
+        created_by: value => scenarios.grid.appendChild(mapp.utils.html.node`
           <div style="grid-column: 1">Created by</div>
           <div style="grid-column: 2">${value}`),
-        created_datetime: value => scenarios.grid.appendChild(_xyz.utils.html.node`
+        created_datetime: value => scenarios.grid.appendChild(mapp.utils.html.node`
           <div style="grid-column: 1">Created on</div>
           <div style="grid-column: 2">${value}`),
-        run_datetime: value => scenarios.grid.appendChild(_xyz.utils.html.node`
+        run_datetime: value => scenarios.grid.appendChild(mapp.utils.html.node`
           <div style="grid-column: 1">Last run</div>
           <div style="grid-column: 2">${value}`),
-        status: value => scenarios.grid.appendChild(_xyz.utils.html.node`
+        status: value => scenarios.grid.appendChild(mapp.utils.html.node`
           <div style="grid-column: 1">Status</div>
           <div style="grid-column: 2">${value}`),
         national_flag: async value => {
           
-          scenarios.grid.appendChild(_xyz.utils.html.node`
+          scenarios.grid.appendChild(mapp.utils.html.node`
             <label style="grid-column: 1/3" class="input-checkbox">
               <input
                 type="checkbox"
@@ -123,7 +123,7 @@ document.dispatchEvent(new CustomEvent('scenario_panel', {
               <div></div>
               <span>National Extent`)
 
-          const drawButton = scenarios.grid.appendChild(_xyz.utils.html.node`
+          const drawButton = scenarios.grid.appendChild(mapp.utils.html.node`
             <button
               .disabled=${scenarios.current.locked == 1}
               style="${`grid-column: 1/3; ${value === 1 && 'display: none;' ||''}`}"
@@ -162,10 +162,10 @@ document.dispatchEvent(new CustomEvent('scenario_panel', {
 
           if (!scenarios.current.locked) {
 
-            scenarios.grid.appendChild(_xyz.utils.html.node`
+            scenarios.grid.appendChild(mapp.utils.html.node`
               <div style="grid-column: 1">Custom Seeds`)
     
-            const customSeedCount = scenarios.grid.appendChild(_xyz.utils.html.node`
+            const customSeedCount = scenarios.grid.appendChild(mapp.utils.html.node`
               <div style="grid-column: 2">`)
     
             _xyz.query({
@@ -176,7 +176,7 @@ document.dispatchEvent(new CustomEvent('scenario_panel', {
                 }
               }).then(response => customSeedCount.textContent = parseInt(response.count))
 
-            scenarios.grid.appendChild(_xyz.utils.html.node`
+            scenarios.grid.appendChild(mapp.utils.html.node`
               <button
                 style="grid-column: 1/3;"
                 class="btn-wide primary-colour"
@@ -223,10 +223,10 @@ document.dispatchEvent(new CustomEvent('scenario_panel', {
 
           }
 
-          scenarios.grid.appendChild(_xyz.utils.html.node`
+          scenarios.grid.appendChild(mapp.utils.html.node`
             <div style="grid-column: 1">Seed Points`)
 
-          const seedCount = scenarios.grid.appendChild(_xyz.utils.html.node`
+          const seedCount = scenarios.grid.appendChild(mapp.utils.html.node`
             <div style="grid-column: 2">`)
 
           _xyz.query({
@@ -239,14 +239,14 @@ document.dispatchEvent(new CustomEvent('scenario_panel', {
 
           if (!scenarios.current.locked) {
 
-            const inputSeed = scenarios.grid.appendChild(_xyz.utils.html.node`
+            const inputSeed = scenarios.grid.appendChild(mapp.utils.html.node`
               <input
                 type="file"
                 accept=".csv"
                 onchange=${e=>csvImport(e, 'seed')}
                 style="display: none;">`)
 
-            scenarios.grid.appendChild(_xyz.utils.html.node`
+            scenarios.grid.appendChild(mapp.utils.html.node`
               <button
                 style="grid-column: 1/3"
                 class="btn-wide primary-colour"
@@ -255,11 +255,11 @@ document.dispatchEvent(new CustomEvent('scenario_panel', {
                   inputSeed.click()
               }}>CSV Import Seed`)
               
-              scenarios.grid.appendChild(_xyz.utils.html.node`
+              scenarios.grid.appendChild(mapp.utils.html.node`
               <div style="grid-column: 1">Closures`)
           
 
-            const closuresCount = scenarios.grid.appendChild(_xyz.utils.html.node`
+            const closuresCount = scenarios.grid.appendChild(mapp.utils.html.node`
               <div style="grid-column: 2">`)
 
             _xyz.query({
@@ -270,14 +270,14 @@ document.dispatchEvent(new CustomEvent('scenario_panel', {
               }
             }).then(response => closuresCount.textContent = parseInt(response.count))
 
-            const inputClosures = scenarios.grid.appendChild(_xyz.utils.html.node`
+            const inputClosures = scenarios.grid.appendChild(mapp.utils.html.node`
               <input
                 type="file"
                 accept=".csv"
                 onchange=${e=>csvImport(e, 'closure')}
                 style="display: none;">`)
 
-            scenarios.grid.appendChild(_xyz.utils.html.node`
+            scenarios.grid.appendChild(mapp.utils.html.node`
               <button
                 style="grid-column: 1/3"
                 class="btn-wide primary-colour"
@@ -289,7 +289,7 @@ document.dispatchEvent(new CustomEvent('scenario_panel', {
           }
 
         },
-        demandid: value => scenarios.grid.appendChild(_xyz.utils.html.node`
+        demandid: value => scenarios.grid.appendChild(mapp.utils.html.node`
           <div style="grid-column: 1">Demand</div>
           <div style="grid-column: 2">
             <button class="btn-drop" .disabled=${scenarios.current.locked == 1}>
@@ -302,7 +302,7 @@ document.dispatchEvent(new CustomEvent('scenario_panel', {
                 <span>${scenarios.demands.find(d => d.demandid === value).name}</span>
                 <div class="icon"></div>
               </div>
-              <ul>${scenarios.demands.map(d => _xyz.utils.html.node`
+              <ul>${scenarios.demands.map(d => mapp.utils.html.node`
                 <li onclick=${e => {
 
                   const drop = e.target.closest('.btn-drop')
@@ -335,7 +335,7 @@ document.dispatchEvent(new CustomEvent('scenario_panel', {
  
         selector.innerHTML = ''
 
-        selector.appendChild(_xyz.utils.html.node`
+        selector.appendChild(mapp.utils.html.node`
         <button class="btn-drop">
           <div
             class="head"
@@ -346,7 +346,7 @@ document.dispatchEvent(new CustomEvent('scenario_panel', {
             <span>${scenarios.current.scenario_name}</span>
             <div class="icon"></div>
           </div>
-          <ul>${scenarios.list.map(scenario => _xyz.utils.html.node`
+          <ul>${scenarios.list.map(scenario => mapp.utils.html.node`
             <li onclick=${e => {
 
               const drop = e.target.closest('.btn-drop')
@@ -364,7 +364,7 @@ document.dispatchEvent(new CustomEvent('scenario_panel', {
              
             }}>${scenario.scenario_name}`)}`)
   
-        scenarios.grid = scenarios.panel.appendChild(_xyz.utils.html.node`
+        scenarios.grid = scenarios.panel.appendChild(mapp.utils.html.node`
           <div style="margin-top: 5px; display:grid; grid-gap: 5px; align-items: center;">`)              
 
         scenarios.current.scenario_id > 0 && loadScenario()
@@ -416,7 +416,7 @@ document.dispatchEvent(new CustomEvent('scenario_panel', {
 
         if (scenarios.current.status === 'running') setTimeout(pingScenario, 10000)
 
-        scenarios.btn = scenarios.grid.appendChild(_xyz.utils.html.node`
+        scenarios.btn = scenarios.grid.appendChild(mapp.utils.html.node`
           <button
             .disabled=${scenarios.current.locked == 1 || scenarios.current.status === 'running'}
             class="btn-wide primary-colour"

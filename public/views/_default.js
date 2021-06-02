@@ -148,7 +148,7 @@ window.onload = () => {
 
     if (locales.length === 1) return
 
-    layersTab.appendChild(xyz.utils.html.node`
+    layersTab.appendChild(mapp.utils.html.node`
       <div>${xyz.language.show_layers_for_locale}</div>
       <button class="btn-drop">
         <div class="head"
@@ -159,7 +159,7 @@ window.onload = () => {
           <span>${locale.name || locale.key}</span>
           <div class="icon"></div>
         </div>
-        <ul>${locales.map(_locale => xyz.utils.html.node`
+        <ul>${locales.map(_locale => mapp.utils.html.node`
             <li>
               <a href="${xyz.host + '?locale=' + _locale.key + 
                 `${xyz.hooks.current.language && '&language=' + xyz.hooks.current.language || ''}`}">
@@ -185,7 +185,7 @@ window.onload = () => {
     })
 
     // Add zoomIn button.
-    const btnZoomIn = btnColumn.appendChild(xyz.utils.html.node `
+    const btnZoomIn = btnColumn.appendChild(mapp.utils.html.node `
       <button
         id="btnZoomIn"
         disabled=${xyz.map.getView().getZoom() >= xyz.locale.maxZoom}
@@ -197,7 +197,7 @@ window.onload = () => {
         }}><div class="xyz-icon icon-add">`)
 
     // Add zoomOut button.
-    const btnZoomOut = btnColumn.appendChild(xyz.utils.html.node`
+    const btnZoomOut = btnColumn.appendChild(mapp.utils.html.node`
       <button
         id="btnZoomOut"
         disabled=${xyz.map.getView().getZoom() <= xyz.locale.minZoom}
@@ -216,7 +216,7 @@ window.onload = () => {
     })
 
     // Add zoom to area button.
-    btnColumn.appendChild(xyz.utils.html.node`
+    btnColumn.appendChild(mapp.utils.html.node`
       <button
         class="mobile-display-none"
         title=${xyz.language.toolbar_zoom_to_area}
@@ -239,7 +239,7 @@ window.onload = () => {
         <div class="xyz-icon icon-pageview">`)
 
     // Add locator button.
-    btnColumn.appendChild(xyz.utils.html.node`
+    btnColumn.appendChild(mapp.utils.html.node`
       <button
         title=${xyz.language.toolbar_current_location}
         onclick=${e => {
@@ -249,7 +249,7 @@ window.onload = () => {
         <div class="xyz-icon icon-gps-not-fixed">`)
 
     // Add fullscreen button.
-    btnColumn.appendChild(xyz.utils.html.node`
+    btnColumn.appendChild(mapp.utils.html.node`
       <button
         class="mobile-display-none"
         title=${xyz.language.toolbar_fullscreen}
@@ -277,7 +277,7 @@ window.onload = () => {
 
       const gazetteer = document.getElementById('gazetteer')
         
-      const btnGazetteer = btnColumn.insertBefore(xyz.utils.html.node`
+      const btnGazetteer = btnColumn.insertBefore(mapp.utils.html.node`
         <button id="btnGazetteer"
           onclick=${e => {
             e.preventDefault()
@@ -304,8 +304,9 @@ window.onload = () => {
       node: document.getElementById('tabview')
     })
 
-    xyz.layers.listview.init({
-      target: layersTab
+    mapp.ui.listview({
+      target: layersTab,
+      list: Object.values(xyz.layers.list)
     })
 
     xyz.locations.listview.init({
@@ -313,7 +314,7 @@ window.onload = () => {
     })
 
     // Add clear all location button.
-    locationsTab.appendChild(xyz.utils.html.node`
+    locationsTab.appendChild(mapp.utils.html.node`
       <button 
         class="tab-display bold primary-colour"
         onclick=${e => {
@@ -339,13 +340,13 @@ window.onload = () => {
 
     xyz.user = document.head.dataset.user && JSON.parse(decodeURI(document.head.dataset.user))
 
-    xyz.user && xyz.utils.idle({
+    xyz.user && mapp.ui.idle({
       host: xyz.host,
       idle: xyz.locale.idle ?? 600
     })
 
     // Append user admin button.
-    xyz.user && xyz.user.admin && btnColumn.appendChild(xyz.utils.html.node`
+    xyz.user && xyz.user.admin && btnColumn.appendChild(mapp.utils.html.node`
       <a
         title=${xyz.language.toolbar_admin}
         class="mobile-display-none"
@@ -353,7 +354,7 @@ window.onload = () => {
         <div class="xyz-icon icon-supervisor-account">`)
 
     // Append logout button.
-    document.head.dataset.login && btnColumn.appendChild(xyz.utils.html.node`
+    document.head.dataset.login && btnColumn.appendChild(mapp.utils.html.node`
       <a
         title="${xyz.user && `${xyz.language.toolbar_logout} ${xyz.user.email}` || 'Login'}"
         href="${xyz.user && '?logout=true' || '?login=true'}">
@@ -362,7 +363,7 @@ window.onload = () => {
 
 
     // Append spacer for tableview
-    btnColumn.appendChild(xyz.utils.html.node`
+    btnColumn.appendChild(mapp.utils.html.node`
       <div style="height: 60px;">`)
 
   }

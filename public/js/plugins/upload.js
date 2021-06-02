@@ -3,15 +3,15 @@ document.dispatchEvent(new CustomEvent('upload', {
 
     _xyz.layers.plugins.upload = layer => {
 
-      const input = _xyz.utils.html.node`
+      const input = mapp.utils.html.node`
       <input type="file" accept=".csv" style="display: none;">`
         
-      const div = _xyz.utils.html.node`
+      const div = mapp.utils.html.node`
       <div style="padding-right: 5px">`
 
       layer.view.appendChild(div)
 
-      const button = _xyz.utils.html.node`
+      const button = mapp.utils.html.node`
       <button
         class="btn-wide primary-colour"
         onclick=${e => {

@@ -26,7 +26,7 @@ document.dispatchEvent(new CustomEvent('national_blueprints', {
       layer.reload()
 
       layer.view.insertBefore(
-        _xyz.utils.html.node`
+        mapp.utils.html.node`
           <div style="padding: 5px">
             <button class="btn-drop">
               <div
@@ -38,7 +38,7 @@ document.dispatchEvent(new CustomEvent('national_blueprints', {
                 <span>${scenarios[0].scenario_name}</span>
                 <div class="icon"></div>
               </div>
-              <ul>${scenarios.map(scenario => _xyz.utils.html.node`
+              <ul>${scenarios.map(scenario => mapp.utils.html.node`
                 <li onclick=${e => {
 
                   const drop = e.target.closest('.btn-drop')

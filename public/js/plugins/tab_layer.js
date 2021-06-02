@@ -60,7 +60,7 @@ document.dispatchEvent(new CustomEvent('tab_layer', {
 
       layer.display && table.display && table.show()
 
-      layer.view.appendChild(_xyz.utils.html.node`
+      layer.view.appendChild(mapp.utils.html.node`
         <label class="input-checkbox">
         <input
         .checked=${!!table.display}

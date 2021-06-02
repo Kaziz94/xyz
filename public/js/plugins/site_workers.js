@@ -29,7 +29,7 @@ document.dispatchEvent(new CustomEvent('site_workers', {
         response.labels.forEach((label, i) => {
           if (response.datasets[0].data[i] === 0) return
 
-          entry.listview.appendChild(_xyz.utils.html.node`
+          entry.listview.appendChild(mapp.utils.html.node`
           <div class="label inline"
             style="${`padding-left: 6px; border-left: 3px solid ${response.datasets[0].backgroundColor[i]}; font-size: 90%; font-weight: 400;`}">${label}</div>
           <div class="val inline">${response.datasets[0].data[i]} %`)

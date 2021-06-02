@@ -3,7 +3,7 @@ document.dispatchEvent(new CustomEvent('array_pills', {
 
     _xyz.locations.plugins.array_pills = entry => {
 
-      entry.value && entry.listview.appendChild(_xyz.utils.html.node`
+      entry.value && entry.listview.appendChild(mapp.utils.html.node`
         <div
           class="${`label ${entry.class}`}"
           style="${`${entry.css_title || ''}`}"
@@ -11,7 +11,7 @@ document.dispatchEvent(new CustomEvent('array_pills', {
 
       entry.value && entry.value.forEach(val => {
 
-        entry.listview.appendChild(_xyz.utils.html.node`
+        entry.listview.appendChild(mapp.utils.html.node`
           <div
             class="${`val ${entry.class}`}"
             style="

@@ -3,7 +3,7 @@ document.dispatchEvent(new CustomEvent('add_region', {
 
     _xyz.locations.plugins.add_region = entry => {
 
-      entry.listview.appendChild(_xyz.utils.html.node`
+      entry.listview.appendChild(mapp.utils.html.node`
         <button
           style="grid-column: 1/3;"
           class="btn-wide primary-colour"

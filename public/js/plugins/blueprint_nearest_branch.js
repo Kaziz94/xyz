@@ -66,7 +66,7 @@ document.dispatchEvent(new CustomEvent('blueprint_nearest_branch', {
 
       entry.display && entry.show()
 
-      entry.listview.appendChild(_xyz.utils.html.node`
+      entry.listview.appendChild(mapp.utils.html.node`
         <label
           class="${`input-checkbox mobile-disabled ${entry.class}`}">
           <input

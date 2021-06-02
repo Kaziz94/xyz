@@ -3,18 +3,18 @@ document.dispatchEvent(new CustomEvent('kfc_trade_zones_edit', {
 
       _xyz.locations.plugins.kfc_trade_zones_edit = entry => {
 
-          const editing_group = _xyz.utils.html.node`<div
+          const editing_group = mapp.utils.html.node`<div
               class="drawer group panel expandable"
               style="font-size: smaller;"><div class="header primary-colour"
               onclick=${e => {
-                  _xyz.utils.toggleExpanderParent(e.target)
+                  mapp.ui.toggleExpanderParent(e.target)
               }}>
               <span>Editing</span>
               <span style="height: 12px;" class="xyz-icon btn-header icon-expander primary-colour-filter"></span>
               `
 
 
-          const edit_feature = _xyz.utils.html.node `
+          const edit_feature = mapp.utils.html.node `
           <button class="btn-wide primary-colour"
           style="grid-column: 1/span 3; font-size: 11px;"
           title="Edit geometry" class="btn-header"
@@ -40,7 +40,7 @@ document.dispatchEvent(new CustomEvent('kfc_trade_zones_edit', {
 
           }}>Edit feature`
 
-          const edit_snap_feature = _xyz.utils.html.node `
+          const edit_snap_feature = mapp.utils.html.node `
           <button class="btn-wide primary-colour"
           style="grid-column: 1/span 3; font-size: 11px; margin-top: 5px;"
           title="Edit geometry with snapping" class = "btn-header"
@@ -61,7 +61,7 @@ document.dispatchEvent(new CustomEvent('kfc_trade_zones_edit', {
 
               if (!tableZ) return
 
-              xhr.open('GET', _xyz.host + '/api/layer/geojson?' + _xyz.utils.paramString({
+              xhr.open('GET', _xyz.host + '/api/layer/geojson?' + mapp.utils.paramString({
                   locale: _xyz.locale.key,
                   layer: entry.location.layer.key,
                   table: tableZ,
@@ -133,7 +133,7 @@ document.dispatchEvent(new CustomEvent('kfc_trade_zones_edit', {
 
           }}>Edit feature with snapping`
 
-          const edit_split_feature = _xyz.utils.html.node`<button class="btn-wide primary-colour"
+          const edit_split_feature = mapp.utils.html.node`<button class="btn-wide primary-colour"
           style="grid-column: 1/span 3; font-size: 11px; margin-top: 5px;"
           title="Split geometry" class="btn-header"
           onclick=${e => {
@@ -147,7 +147,7 @@ document.dispatchEvent(new CustomEvent('kfc_trade_zones_edit', {
 
           editing_group.appendChild(edit_split_feature)
 
-          //editing_group.appendChild(_xyz.utils.html.node`<div><smaller>Click with Alt to remove vertex.</smaller></div>`)
+          //editing_group.appendChild(mapp.utils.html.node`<div><smaller>Click with Alt to remove vertex.</smaller></div>`)
 
           entry.listview.appendChild(editing_group)
          

@@ -5,13 +5,13 @@ document.dispatchEvent(new CustomEvent('tab_location', {
 
       const tab = {
         title: 'Location',
-        target: _xyz.utils.html.node`<div>So we all say`,
+        target: mapp.utils.html.node`<div>So we all say`,
         location: entry.location
       }
 
       _xyz.tabview.add(tab)
 
-      entry.listview.appendChild(_xyz.utils.html.node`
+      entry.listview.appendChild(mapp.utils.html.node`
         <label class="input-checkbox">
         <input
           type="checkbox"

@@ -9,11 +9,11 @@ document.dispatchEvent(new CustomEvent('circle_area', {
 
       const panel = layer.view.querySelector('.panel')
 
-      panel.appendChild(_xyz.utils.html.node `<button
-              class="btn-wide primary-colour"
-              onclick=${e => {
-
-                e.stopPropagation();
+      panel.appendChild(mapp.utils.html.node `
+        <button
+          class="btn-wide primary-colour"
+          onclick=${e => {
+            e.stopPropagation();
 
                 const btn = e.target;
                 if (btn.classList.contains('active')) return _xyz.mapview.interaction.draw.cancel();
@@ -30,7 +30,7 @@ document.dispatchEvent(new CustomEvent('circle_area', {
 
                     const geom_p = ol.proj.transform(features[0].getGeometry().getCoordinates(), `EPSG:${_xyz.mapview.srid}`, 'EPSG:4326')
 
-                    let _geometry = _xyz.utils.turf.circle(
+                    let _geometry = mapp.utils.turf.circle(
                       geom_p, 
                       layer.edit.circle_area.radius, 
                       {steps: 33, units: 'miles'})
@@ -51,7 +51,7 @@ document.dispatchEvent(new CustomEvent('circle_area', {
 
                     xhr.open('POST', _xyz.host +
                       '/api/location/new?' +
-                      _xyz.utils.paramString({
+                      mapp.utils.paramString({
                         locale: _xyz.locale.key,
                         layer: layer.key,
                         table: layer.table
@@ -102,7 +102,7 @@ document.dispatchEvent(new CustomEvent('circle_area', {
     }
 
     function makeSlider(params) {
-      return _xyz.utils.html.node `
+      return mapp.utils.html.node `
           <div style="margin-top: 12px; grid-column: 1 / 3;"
           <span>${params.title}</span>
           <span class="bold">${params.range}</span>

@@ -6,22 +6,22 @@ function create(_xyz) {
 
         let timeout
 
-        const panel = _xyz.utils.html.node`<div class="drawer panel expandable">`
+        const panel = mapp.utils.html.node`<div class="drawer panel expandable">`
 
-        panel.appendChild(_xyz.utils.html.node`
+        panel.appendChild(mapp.utils.html.node`
         	<div class="header primary-colour"
         	onclick=${e => {
         		e.stopPropagation()
-        		_xyz.utils.toggleExpanderParent(e.target, true)
+        		mapp.ui.toggleExpanderParent(e.target, true)
         	}}>
         	<span>Visual Adjustment</span>
         	<button class="btn-header xyz-icon icon-expander primary-colour-filter">`)
 
-        const grid = _xyz.utils.html.node `
+        const grid = mapp.utils.html.node `
 			<div style="display: grid; align-items: center;">`
 
 
-        grid.appendChild(_xyz.utils.html.node`<div class="header primary-colour" style-"grid-column: 1/2;"><span><b>Icon`)
+        grid.appendChild(mapp.utils.html.node`<div class="header primary-colour" style-"grid-column: 1/2;"><span><b>Icon`)
 
         grid.appendChild(icon_scale({
                 title: 'Scale',
@@ -32,7 +32,7 @@ function create(_xyz) {
             }))
 
 
-        let div = _xyz.utils.html.node`<div>`
+        let div = mapp.utils.html.node`<div>`
 
         div.appendChild(grid)
         
@@ -64,7 +64,7 @@ function create(_xyz) {
 
             if(layer.style.cluster) layer.style.cluster.initial_scale = layer.style.cluster.scale || 1
 
-        	return _xyz.utils.html.node `
+        	return mapp.utils.html.node `
         	<div style="grid-column: 1;">${params.title}</div>
             <div style="grid-column: 2;">${layer.style.default.scale || 1}</div>
         	<div class="input-range"  style="grid-column: 3;">

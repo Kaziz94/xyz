@@ -11,15 +11,15 @@ document.dispatchEvent(new CustomEvent('compare_location', {
 
         valArray.unshift(entry.location.id, entry.location.infoj[3].value)
 
-        const col = _xyz.utils.html.node`
-          <div style="display: contents;">${valArray.map((val, i)=>_xyz.utils.html`
+        const col = mapp.utils.html.node`
+          <div style="display: contents;">${valArray.map((val, i)=>mapp.utils.html`
             <div
               style="${`
                 border-bottom: 1px solid #ddd;
                 grid-column:${entry.location.layer.comparison_tab.columns};
                 grid-row:${i+1}`}">${val}`)}`
 
-        col.appendChild(_xyz.utils.html.node`
+        col.appendChild(mapp.utils.html.node`
           <div
             class="hover"
             style="${`

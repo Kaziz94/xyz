@@ -3,7 +3,7 @@ document.dispatchEvent(new CustomEvent('download', {
 
     _xyz.layers.plugins.download = layer => {
 
-      layer.view.appendChild(_xyz.utils.html.node`
+      layer.view.appendChild(mapp.utils.html.node`
       <div style="padding-right: 5px;">
       <button
         class="btn-wide primary-colour"
@@ -48,7 +48,7 @@ document.dispatchEvent(new CustomEvent('download', {
       
           const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
 
-          const link = _xyz.utils.html.node `
+          const link = mapp.utils.html.node `
           <a
             href=${URL.createObjectURL(blob)}
             download=${scenarios

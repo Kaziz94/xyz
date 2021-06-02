@@ -8,7 +8,7 @@ module.exports = {
     bundle: true,
     minify: true,
     treeshake: true,
-    entrypoints: ['./lib/mapp.mjs'],
+    entrypoints: ['./lib/mapp.mjs', './lib/ui.mjs'],
   },
   packageOptions: {
     source: 'local',

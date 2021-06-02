@@ -2,6 +2,8 @@ document.dispatchEvent(new CustomEvent('theme_slider', { detail: addModule }))
 
 function addModule(_xyz) {
 
+  return
+
   const graduatedTheme = _xyz.layers.view.style.themes.graduated
 
   _xyz.layers.view.style.themes.graduated = layer => {
@@ -39,7 +41,7 @@ function addModule(_xyz) {
         'unique_dev_23'
       ]
 
-      legend.appendChild(_xyz.utils.html.node`
+      legend.appendChild(mapp.utils.html.node`
       <label class="input-checkbox" style="margin-top: 12px; grid-column: 1/3;">
       <input
         type="checkbox"
@@ -69,7 +71,7 @@ function addModule(_xyz) {
       </input>
       <div></div><span>24 hour loop`);
 
-      legend.appendChild(_xyz.utils.html.node`
+      legend.appendChild(mapp.utils.html.node`
       <div style="grid-column: 1/3;">
         <span>Hour: </span>
         <span class="bold">0</span>
@@ -87,7 +89,7 @@ function addModule(_xyz) {
             layer.L.setStyle(layer.L.getStyle())
           }}>`)
 
-      legend.appendChild(_xyz.utils.html.node`
+      legend.appendChild(mapp.utils.html.node`
       <div style="margin-top: 12px; grid-column: 1/3;">
         <span>Opacity: </span>
         <span class="bold">1</span>

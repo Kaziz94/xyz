@@ -104,7 +104,7 @@ window.onload = () => {
       .catch(error => console.error(error))
 
     // Add zoomIn button.
-    const btnZoomIn = btnColumn.appendChild(xyz.utils.html.node `
+    const btnZoomIn = btnColumn.appendChild(mapp.utils.html.node `
       <button
         disabled=${xyz.map.getView().getZoom() >= xyz.locale.maxZoom}
         class="enabled"
@@ -116,7 +116,7 @@ window.onload = () => {
         }}><div class="xyz-icon icon-add">`)
 
     // Add zoomOut button.
-    const btnZoomOut = btnColumn.appendChild(xyz.utils.html.node`
+    const btnZoomOut = btnColumn.appendChild(mapp.utils.html.node`
       <button
         disabled=${xyz.map.getView().getZoom() <= xyz.locale.minZoom}
         class="enabled"
@@ -136,7 +136,7 @@ window.onload = () => {
 
 
     // Add fullscreen button.
-    btnColumn.appendChild(xyz.utils.html.node`
+    btnColumn.appendChild(mapp.utils.html.node`
       <button
         title=${xyz.language.toolbar_fullscreen}
         onclick=${e => {
@@ -156,7 +156,7 @@ window.onload = () => {
 
       const gazetteer = document.getElementById('gazetteer')
         
-      const btnGazetteer = btnColumn.insertBefore(xyz.utils.html.node`
+      const btnGazetteer = btnColumn.insertBefore(mapp.utils.html.node`
         <button id="btnGazetteer"
           onclick=${e => {
             e.preventDefault()
@@ -187,7 +187,7 @@ window.onload = () => {
     })
 
     // Add clear all location button.
-    locationsTab.appendChild(xyz.utils.html.node`
+    locationsTab.appendChild(mapp.utils.html.node`
       <button 
         class="tab-display bold primary-colour"
         onclick=${e => {

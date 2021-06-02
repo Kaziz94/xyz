@@ -5,14 +5,14 @@ document.dispatchEvent(new CustomEvent('cluster', {
 
       let timer
 
-      layer.view.appendChild(_xyz.utils.html.node `
+      layer.view.appendChild(mapp.utils.html.node `
         <div
           class="drawer panel expandable expanded">
           <div
             class="header primary-colour"
             onclick=${e => {
               e.stopPropagation()
-              _xyz.utils.toggleExpanderParent(e.target)
+              mapp.ui.toggleExpanderParent(e.target)
             }}>
             <span>Cluster</span>
             <button

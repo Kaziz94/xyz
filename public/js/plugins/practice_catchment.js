@@ -28,46 +28,46 @@ document.dispatchEvent(new CustomEvent('practice_catchment', {
           }
         })
 
-        entry.listview.appendChild(_xyz.utils.html.node`
+        entry.listview.appendChild(mapp.utils.html.node`
         <div class="label inline">Population</div>
         <div class="val inline">${response.pop}`)
 
-        entry.listview.appendChild(_xyz.utils.html.node`
+        entry.listview.appendChild(mapp.utils.html.node`
         <div class="label inline">OAC Index</div>
         <div class="val inline"
           style="${`color:${index_color(response.oac_index)}`}">${parseFloat(response.oac_index).toFixed(2)}`)
 
-        entry.listview.appendChild(_xyz.utils.html.node`
+        entry.listview.appendChild(mapp.utils.html.node`
         <div class="label inline">Index - NHS exempt</div>
         <div class="val inline"
           style="${`color:${index_color(response.nhs_ex_index)}`}">${parseFloat(response.nhs_ex_index).toFixed(2)}`)
 
-        entry.listview.appendChild(_xyz.utils.html.node`
+        entry.listview.appendChild(mapp.utils.html.node`
         <div class="label inline">Index - NHS Fee Pay</div>
         <div class="val inline" 
           style="${`color:${index_color(response.nhs_fee_index)}`}">${parseFloat(response.nhs_fee_index).toFixed(2)}`)
 
-        entry.listview.appendChild(_xyz.utils.html.node`
+        entry.listview.appendChild(mapp.utils.html.node`
         <div class="label inline">Index - Full Price Private</div>
         <div class="val inline"
           style="${`color:${index_color(response.private_fp_index)}`}">${parseFloat(response.private_fp_index).toFixed(2)}`)
 
-        entry.listview.appendChild(_xyz.utils.html.node`
+        entry.listview.appendChild(mapp.utils.html.node`
         <div class="label inline">Index - Private Affordable</div>
         <div class="val inline"
           style="${`color:${index_color(response.private_afford_index)}`}">${parseFloat(response.private_afford_index).toFixed(2)}`)
 
-        entry.listview.appendChild(_xyz.utils.html.node`
+        entry.listview.appendChild(mapp.utils.html.node`
         <div class="label inline">Competitiveness Index</div>
         <div class="val inline"
           style="${`color:${index_color(response.competitiveness)}`}">${parseFloat(response.competitiveness).toFixed(2)}`)
 
-        entry.listview.appendChild(_xyz.utils.html.node`
+        entry.listview.appendChild(mapp.utils.html.node`
         <div class="label inline">Gap to NHS Index</div>
         <div class="val inline"
           style="${`color:${index_color(response.gap_to_nhs_index)}`}">${parseFloat(response.gap_to_nhs_index).toFixed(2)}`)          
 
-        entry.listview.appendChild(_xyz.utils.html.node`
+        entry.listview.appendChild(mapp.utils.html.node`
         <div class="label inline">Total Demand (£)</div>
         <div class="val inline">${parseInt(response.total_dem).toLocaleString()}`)
         

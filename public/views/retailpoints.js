@@ -110,7 +110,7 @@ window.onload = () => {
 
     const filter = document.getElementById('Filter')
 
-    filter.appendChild(xyz.utils.html.node `
+    filter.appendChild(mapp.utils.html.node `
       <label class="input-checkbox">
         <input type="checkbox" checked=true
           onchange=${e=>layerFilter('Supermarket', e.target.checked)}>
@@ -118,7 +118,7 @@ window.onload = () => {
         <div></div>
         <span>Supermarket`)
 
-    filter.appendChild(xyz.utils.html.node `
+    filter.appendChild(mapp.utils.html.node `
       <label class="input-checkbox">
         <input type="checkbox" checked=true
           onchange=${e=>layerFilter('Convenience', e.target.checked)}>

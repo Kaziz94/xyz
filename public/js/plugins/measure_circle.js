@@ -3,7 +3,7 @@ document.dispatchEvent(new CustomEvent('measure_circle', {
 
       if(!document.getElementById('mapButton')) return
 
-      document.getElementById('mapButton').appendChild(_xyz.utils.html.node`
+      document.getElementById('mapButton').appendChild(mapp.utils.html.node`
       <button
         class="mobile-display-none"
           title=${_xyz.language.toolbar_measure}

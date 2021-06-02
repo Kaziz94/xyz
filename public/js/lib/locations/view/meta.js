@@ -1,7 +1,7 @@
 export default (_xyz) => (entry) => {
   if (!entry.value)
     return;
-  let div = _xyz.utils.html.node`
+  let div = mapp.utils.html.node`
    <div 
     style="grid-column: 1 / 3;
     width: 100%;
@@ -10,11 +10,11 @@ export default (_xyz) => (entry) => {
     color: #666;
     border-radius: 4px;
     background-color: linen;">`;
-  let inner_grid = _xyz.utils.html.node`<div style="display: grid;">`;
+  let inner_grid = mapp.utils.html.node`<div style="display: grid;">`;
   div.appendChild(inner_grid);
   entry.listview.appendChild(div);
   Object.entries(entry.value).forEach((a) => {
-    inner_grid.appendChild(_xyz.utils.html.node`<div style="grid-column: 1;">${a[0]}`);
-    inner_grid.appendChild(_xyz.utils.html.node`<div style="grid-column: 2;">${a[1]}`);
+    inner_grid.appendChild(mapp.utils.html.node`<div style="grid-column: 1;">${a[0]}`);
+    inner_grid.appendChild(mapp.utils.html.node`<div style="grid-column: 2;">${a[1]}`);
   });
 };

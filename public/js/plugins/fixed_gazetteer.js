@@ -5,13 +5,13 @@ document.dispatchEvent(new CustomEvent('fixed_gazetteer', {
 
     const ctrl = document.getElementById('ctrls')
 
-    ctrl.insertBefore(_xyz.utils.html.node`
+    ctrl.insertBefore(mapp.utils.html.node`
     <div
       style="height: 50px;"
       class="mobile-display-none">`,
       ctrl.firstChild)
 
-    document.body.insertBefore(_xyz.utils.html.node`
+    document.body.insertBefore(mapp.utils.html.node`
       <div id="gazetteer" class="display-none">
         <style>
           @media only screen and (min-width: 700px) {

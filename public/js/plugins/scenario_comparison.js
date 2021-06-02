@@ -13,17 +13,17 @@ document.dispatchEvent(new CustomEvent('scenario_comparison', {
         // Expander control for layer drawer.
         header.onclick = e => {
           e.stopPropagation()
-          _xyz.utils.toggleExpanderParent(e.target, true)
+          mapp.ui.toggleExpanderParent(e.target, true)
         }
   
         // Add the expander toggle to the layer view header.
-        header.appendChild(_xyz.utils.html.node`
+        header.appendChild(mapp.utils.html.node`
         <button
           title=${_xyz.language.layer_toggle_dashboard}
           class="btn-header xyz-icon icon-expander"
           onclick=${e=>{
             e.stopPropagation()
-            _xyz.utils.toggleExpanderParent(e.target)
+            mapp.ui.toggleExpanderParent(e.target)
           }}>`)
       }
 
@@ -102,23 +102,23 @@ document.dispatchEvent(new CustomEvent('scenario_comparison', {
         query: 'scenario_list'
       })
 
-      const expander = layer.view.appendChild(_xyz.utils.html.node`<div>`)
+      const expander = layer.view.appendChild(mapp.utils.html.node`<div>`)
 
-      const panel = expander.appendChild(_xyz.utils.html.node`
+      const panel = expander.appendChild(mapp.utils.html.node`
       <div style="padding-right: 5px; grid-gap: 5px; display: grid;">`)
 
-      panel.appendChild(_xyz.utils.html.node`<div>Scenario`)
+      panel.appendChild(mapp.utils.html.node`<div>Scenario`)
 
-      _xyz.layers.list.ying.scenariopanel = panel.appendChild(_xyz.utils.html.node`<div>`)
+      _xyz.layers.list.ying.scenariopanel = panel.appendChild(mapp.utils.html.node`<div>`)
 
       layerControls(_xyz.layers.list.ying, scenarios)
 
-      panel.appendChild(_xyz.utils.html.node`
+      panel.appendChild(mapp.utils.html.node`
       <div style="width: 100%; margin: 5px 0; border-bottom: 1px solid #999;">`)
 
-      panel.appendChild(_xyz.utils.html.node`<div>Baseline`)
+      panel.appendChild(mapp.utils.html.node`<div>Baseline`)
 
-      _xyz.layers.list.yang.scenariopanel = panel.appendChild(_xyz.utils.html.node`<div>`)
+      _xyz.layers.list.yang.scenariopanel = panel.appendChild(mapp.utils.html.node`<div>`)
 
       layerControls(_xyz.layers.list.yang, [{
           "scenario_id": 1,
@@ -138,21 +138,21 @@ document.dispatchEvent(new CustomEvent('scenario_comparison', {
         }
       ])
 
-      panel.appendChild(_xyz.utils.html.node`
+      panel.appendChild(mapp.utils.html.node`
       <div style="width: 100%; margin: 5px 0; border-bottom: 1px solid #999;">`)
 
-      const reportA = panel.appendChild(_xyz.utils.html.node`
+      const reportA = panel.appendChild(mapp.utils.html.node`
         <a
           title="Open Comparison Report View"
           target="_blank"
           style="font-weight: bold; margin-bottom: 5px; color: #090;">Report View`)
 
-      const reportB = document.getElementById('mapButton').appendChild(_xyz.utils.html.node`
+      const reportB = document.getElementById('mapButton').appendChild(mapp.utils.html.node`
         <a
           title="Open Comparison Report View"
           target="_blank">`)
           
-      reportB.appendChild(_xyz.utils.html.node`<div class="xyz-icon icon-wysiwyg">`)
+      reportB.appendChild(mapp.utils.html.node`<div class="xyz-icon icon-wysiwyg">`)
 
       _xyz.layers.plugins.scenario_comparison_layerControls = layerControls
 
@@ -162,7 +162,7 @@ document.dispatchEvent(new CustomEvent('scenario_comparison', {
 
         _layer.scenariopanel.innerHTML = ''
 
-        _layer.scenariopanel.appendChild(_xyz.utils.html.node`
+        _layer.scenariopanel.appendChild(mapp.utils.html.node`
           <button class="btn-drop">
             <div
               class="head"
@@ -173,7 +173,7 @@ document.dispatchEvent(new CustomEvent('scenario_comparison', {
               <span>${scenarios[0].scenario_name}</span>
               <div class="icon"></div>
             </div>
-            <ul>${scenarios.map(scenario => _xyz.utils.html.node`
+            <ul>${scenarios.map(scenario => mapp.utils.html.node`
               <li onclick=${e => {
 
                 const drop = e.target.closest('.btn-drop')
@@ -185,7 +185,7 @@ document.dispatchEvent(new CustomEvent('scenario_comparison', {
 
                 _layer.reload()
 
-                const href = _xyz.host + '/view/report?' + _xyz.utils.paramString(
+                const href = _xyz.host + '/view/report?' + mapp.utils.paramString(
                   Object.assign({
                     locale: _xyz.locale.key,
                     layers: _xyz.hooks.current.layers,
@@ -212,7 +212,7 @@ document.dispatchEvent(new CustomEvent('scenario_comparison', {
               }}>${scenario.scenario_name}`)}`)
 
 
-        _layer.scenariopanel.appendChild(_xyz.utils.html.node`
+        _layer.scenariopanel.appendChild(mapp.utils.html.node`
           <button class="btn-drop" style="margin-top: 5px;">
             <div
               class="head"
@@ -223,7 +223,7 @@ document.dispatchEvent(new CustomEvent('scenario_comparison', {
               <span>${Object.keys(_layer.style.themes)[0]}</span>
               <div class="icon"></div>
             </div>
-            <ul>${Object.entries(_layer.style.themes).map(theme => _xyz.utils.html.node`
+            <ul>${Object.entries(_layer.style.themes).map(theme => mapp.utils.html.node`
               <li onclick=${e=>{
                 const drop = e.target.closest('.btn-drop')
                 drop.querySelector('span').textContent = theme[0]
@@ -231,21 +231,21 @@ document.dispatchEvent(new CustomEvent('scenario_comparison', {
                 _layer.style.theme = theme[1]
                 _layer.reload()
 
-                _xyz.utils.render(_layer.style._legend, _xyz.layers.view.style.legend(_layer))
+                mapp.utils.render(_layer.style._legend, _xyz.layers.view.style.legend(_layer))
 
                 }}>${theme[0]}`)}`)
 
 
-        _layer.style._legend = panel.appendChild(_xyz.utils.html.node`<div>`)
+        _layer.style._legend = panel.appendChild(mapp.utils.html.node`<div>`)
 
-        _xyz.utils.render(_layer.style._legend, _xyz.layers.view.style.legend(_layer))
+        mapp.utils.render(_layer.style._legend, _xyz.layers.view.style.legend(_layer))
 
       }
 
 
       _xyz.mapview.node.addEventListener('changeEnd', ()=>{
 
-        const href = _xyz.host + '/view/report?' + _xyz.utils.paramString(
+        const href = _xyz.host + '/view/report?' + mapp.utils.paramString(
           Object.assign({
             locale: _xyz.locale.key,
             layers: _xyz.hooks.current.layers,

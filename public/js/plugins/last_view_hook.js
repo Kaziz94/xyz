@@ -20,7 +20,7 @@ document.dispatchEvent(new CustomEvent('last_view_hook', {
 
     })
 
-    document.getElementById('mapButton').insertBefore(_xyz.utils.html.node`
+    document.getElementById('mapButton').insertBefore(mapp.utils.html.node`
       <button
       class="mobile-display-none"
         title="Set previous map view"

@@ -3,7 +3,7 @@ document.dispatchEvent(new CustomEvent('last_update', {
 
     _xyz.layers.plugins.last_update = layer => {
 
-      const div = layer.view.appendChild(_xyz.utils.html.node`
+      const div = layer.view.appendChild(mapp.utils.html.node`
       <div style="margin: 10px 0 5px 0; font-weight: bold;">`)
 
       _xyz.query({

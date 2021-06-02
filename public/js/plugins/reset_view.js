@@ -5,7 +5,7 @@ document.dispatchEvent(new CustomEvent('reset_view', {
 
     if (!mapButton) return
       
-    const node = _xyz.utils.html.node`
+    const node = mapp.utils.html.node`
       <button
         class="mobile-display-none"
         title="Reset View"

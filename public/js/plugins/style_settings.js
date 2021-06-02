@@ -6,18 +6,18 @@ function create(_xyz) {
 
         let timeout
 
-        const panel = _xyz.utils.html.node`<div class="drawer panel expandable">`
+        const panel = mapp.utils.html.node`<div class="drawer panel expandable">`
 
-        panel.appendChild(_xyz.utils.html.node`
+        panel.appendChild(mapp.utils.html.node`
         	<div class="header primary-colour"
         	onclick=${e => {
         		e.stopPropagation()
-        		_xyz.utils.toggleExpanderParent(e.target, true)
+        		mapp.ui.toggleExpanderParent(e.target, true)
         	}}>
         	<span>Visual Adjustment</span>
         	<button class="btn-header xyz-icon icon-expander primary-colour-filter">`)
 
-        const grid = _xyz.utils.html.node `
+        const grid = mapp.utils.html.node `
 			<div style="display: grid; align-items: center;">`
 
         const types = {
@@ -25,7 +25,7 @@ function create(_xyz) {
             range: rangeInput
         }
 
-        grid.appendChild(_xyz.utils.html.node`<div class="header primary-colour" style-"grid-column: 1/2;"><span><b>Fill`)
+        grid.appendChild(mapp.utils.html.node`<div class="header primary-colour" style-"grid-column: 1/2;"><span><b>Fill`)
 
         grid.appendChild(color_picker({
                 title: 'Colour',
@@ -40,7 +40,7 @@ function create(_xyz) {
                 step: 0.1
             }))
 
-        grid.appendChild(_xyz.utils.html.node`<div class="header primary-colour" style-"grid-column: 1/2;"><span><b>Stroke`)
+        grid.appendChild(mapp.utils.html.node`<div class="header primary-colour" style-"grid-column: 1/2;"><span><b>Stroke`)
 
         grid.appendChild(color_picker({
             title: 'Colour',
@@ -65,7 +65,7 @@ function create(_xyz) {
 
         if(layer.style.label) {
 
-            grid.appendChild(_xyz.utils.html.node`<div class="header primary-colour" style-"grid-column: 1/2;"><span><b>Labels`)
+            grid.appendChild(mapp.utils.html.node`<div class="header primary-colour" style-"grid-column: 1/2;"><span><b>Labels`)
 
             grid.appendChild(color_picker({
                 title: 'Colour',
@@ -96,7 +96,7 @@ function create(_xyz) {
             }))
         }
 
-        let div = _xyz.utils.html.node`<div>`
+        let div = mapp.utils.html.node`<div>`
 
         div.appendChild(grid)
         
@@ -106,7 +106,7 @@ function create(_xyz) {
 
         function color_picker(params){
 
-            const __div = _xyz.utils.html.node`<div acp-show-hsl="no" style="display: none; position:absolute; z-index: 10000;">
+            const __div = mapp.utils.html.node`<div acp-show-hsl="no" style="display: none; position:absolute; z-index: 10000;">
             <div title="Close" style="position: absolute; z-index: 10001; width: 12px; height: 12px;" class="xyz-icon icon-close"
             onclick=${e => {
                 e.stopPropagation()
@@ -114,9 +114,9 @@ function create(_xyz) {
             }}
             ></div>`
 
-            const picker = _xyz.utils.acolorpicker.from(__div)
+            const picker = mapp.ui.aColorPicker.from(__div)
 
-            const html = _xyz.utils.html.node `
+            const html = mapp.utils.html.node `
             <div style="grid-column: 1;">${params.title}</div>
             <input
             placeholder="${params.placeholder}"
@@ -144,7 +144,7 @@ function create(_xyz) {
 
             function applyColor(e){
 
-                if(!_xyz.utils.Chroma.valid(e.target.value)) return
+                if(!mapp.utils.chroma.valid(e.target.value)) return
 
                 e.target.style.borderColor = e.target.value
 
@@ -176,7 +176,7 @@ function create(_xyz) {
 
         function textInput(params) {
 
-            return _xyz.utils.html.node `
+            return mapp.utils.html.node `
             <div style="grid-column: 1;">${params.title}</div>
             <input
             placeholder="${params.placeholder}"
@@ -209,7 +209,7 @@ function create(_xyz) {
 
         function rangeInput(params) {
 
-        	return _xyz.utils.html.node `
+        	return mapp.utils.html.node `
         	<div style="grid-column: 1;">${params.title}</div>
         	<div style="grid-column: 2;">${layer.style[params.style || 'default'][params.field]}</div>
         	<div class="input-range"  style="grid-column: 3;">

@@ -5,7 +5,7 @@ document.dispatchEvent(new CustomEvent('tab_locale', {
 
       const tab = {
         title: 'Locale',
-        target: _xyz.utils.html.node`<div>This is the way`
+        target: mapp.utils.html.node`<div>This is the way`
       }
 
       _xyz.tabview.add(tab)
