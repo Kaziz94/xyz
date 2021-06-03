@@ -19,7 +19,7 @@ document.dispatchEvent(new CustomEvent('scenario_comparison', {
         // Add the expander toggle to the layer view header.
         header.appendChild(mapp.utils.html.node`
         <button
-          title=${_xyz.language.layer_toggle_dashboard}
+          title=${mapp.dictionary.layer_toggle_dashboard}
           class="btn-header xyz-icon icon-expander"
           onclick=${e=>{
             e.stopPropagation()

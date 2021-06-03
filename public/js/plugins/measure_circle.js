@@ -6,7 +6,7 @@ document.dispatchEvent(new CustomEvent('measure_circle', {
       document.getElementById('mapButton').appendChild(mapp.utils.html.node`
       <button
         class="mobile-display-none"
-          title=${_xyz.language.toolbar_measure}
+          title=${mapp.dictionary.toolbar_measure}
           onclick=${e => {
 
             if (e.target.classList.contains('enabled')) return _xyz.mapview.interaction.draw.cancel()

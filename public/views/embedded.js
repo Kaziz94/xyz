@@ -62,8 +62,8 @@ window.onload = () => {
     hooks: true
   })
 
-  document.getElementById('layers_header').textContent = xyz.language.layers_header
-  document.getElementById('locations_header').textContent = xyz.language.locations_header
+  document.getElementById('layers_header').textContent = mapp.dictionary.layers_header
+  document.getElementById('locations_header').textContent = mapp.dictionary.locations_header
 
 
   xyz.workspace.get.locales().then(locales => {
@@ -108,7 +108,7 @@ window.onload = () => {
       <button
         disabled=${xyz.map.getView().getZoom() >= xyz.locale.maxZoom}
         class="enabled"
-        title=${xyz.language.toolbar_zoom_in}
+        title=${mapp.dictionary.toolbar_zoom_in}
         onclick=${e => {
           const z = parseInt(xyz.map.getView().getZoom() + 1)
           xyz.map.getView().setZoom(z)
@@ -120,7 +120,7 @@ window.onload = () => {
       <button
         disabled=${xyz.map.getView().getZoom() <= xyz.locale.minZoom}
         class="enabled"
-        title=${xyz.language.toolbar_zoom_out}
+        title=${mapp.dictionary.toolbar_zoom_out}
         onclick=${e => {
           const z = parseInt(xyz.map.getView().getZoom() - 1)
           xyz.map.getView().setZoom(z)
@@ -138,7 +138,7 @@ window.onload = () => {
     // Add fullscreen button.
     btnColumn.appendChild(mapp.utils.html.node`
       <button
-        title=${xyz.language.toolbar_fullscreen}
+        title=${mapp.dictionary.toolbar_fullscreen}
         onclick=${e => {
           e.target.classList.toggle('enabled')
           document.body.classList.toggle('fullscreen')
@@ -196,7 +196,7 @@ window.onload = () => {
             .filter(record => !!record.location)
             .forEach(record => record.location.remove())
         }}>
-        ${xyz.language.clear_all_locations}`)
+        ${mapp.dictionary.clear_all_locations}`)
 
     // Select locations from hooks.
     mapp.hooks.current.locations.forEach(_hook => {

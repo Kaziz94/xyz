@@ -6,10 +6,10 @@ document.dispatchEvent(new CustomEvent('bring_layer_to_front', {
       layer.view.appendChild(mapp.utils.html.node`
       <div style="padding-right: 5px">
       <button 
-        title=${_xyz.language.layer_style_bring_to_front}
+        title=${mapp.dictionary.layer_style_bring_to_front}
         style="margin-top: 5px;"
         class="btn-wide primary-colour"
-        onclick=${()=>layer.bringToFront()}>${_xyz.language.layer_style_bring_to_front}`)
+        onclick=${()=>layer.bringToFront()}>${mapp.dictionary.layer_style_bring_to_front}`)
 
     }
 

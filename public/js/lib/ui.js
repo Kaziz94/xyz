@@ -73,11 +73,11 @@ var b=t=>({get:e=>t.get(e),set:(e,i)=>(t.set(e,i),i)}),j=/([^\s\\>"'=]+)\s*=\s*(
     <div
       class="switch-all label"
       style="grid-column: 1/3;">
-        ${mapp_dictionary.layer_style_switch_caption}
+        ${mapp.dictionary.layer_style_switch_caption}
       <a
         class="primary-colour"
         style="cursor: pointer;"
-        onclick=${n=>{n.stopPropagation(),i.querySelectorAll(".switch").forEach(o=>o.click()),t.reload()}}>${mapp_dictionary.layer_style_switch_all}</a>.`),t.filter.current[e.field]||(t.filter.current[e.field]={}),Object.entries(e.cat).forEach(n=>{let o=Object.assign({},t.style.default,n[1].style&&n[1].style.marker||n[1].style||n[1]);o.svg||o.type?i.appendChild(x(Object.assign({legend:!0},o))):o.fillOpacity===void 0?i.appendChild(g.node`
+        onclick=${n=>{n.stopPropagation(),i.querySelectorAll(".switch").forEach(o=>o.click()),t.reload()}}>${mapp.dictionary.layer_style_switch_all}</a>.`),t.filter.current[e.field]||(t.filter.current[e.field]={}),Object.entries(e.cat).forEach(n=>{let o=Object.assign({},t.style.default,n[1].style&&n[1].style.marker||n[1].style||n[1]);o.svg||o.type?i.appendChild(x(Object.assign({legend:!0},o))):o.fillOpacity===void 0?i.appendChild(g.node`
       <svg height=24 width=24>
       <line
         x1=0 y1=12 x2=24 y2=12
@@ -93,7 +93,7 @@ var b=t=>({get:e=>t.get(e),set:(e,i)=>(t.set(e,i),i)}),j=/([^\s\\>"'=]+)\s*=\s*(
     <div
       class="label switch"
       onclick=${l=>{l.stopPropagation(),l.target.classList.toggle("disabled"),l.target.classList.contains("disabled")?(t.filter.current[e.field].ni||(t.filter.current[e.field].ni=[]),t.filter.current[e.field].ni.push(n[0])):(t.filter.current[e.field].ni.splice(t.filter.current[e.field].ni.indexOf(n[0]),1),t.filter.current[e.field].ni.length||delete t.filter.current[e.field].ni),t.reload()}}>${n[1].label||n[0]}`)}),t.style.cluster&&(i.appendChild(x(Object.assign({legend:!0,cluster:!0},t.style.cluster))),i.appendChild(a.node`
-    <div class="label" style="alignment-baseline:central;">${mapp_dictionary.layer_style_cluster}`)),i};var z=t=>{let e=a.node`<div class="legend grid">`;return t.style.theme.cat_arr.forEach(i=>{let n=Object.assign({},t.style.default,i.style&&i.style.marker||i.style||i);n.svg||n.type?e.appendChild(x(Object.assign({legend:!0},n))):n.fillOpacity===void 0?e.appendChild(g.node`
+    <div class="label" style="alignment-baseline:central;">${mapp.dictionary.layer_style_cluster}`)),i};var z=t=>{let e=a.node`<div class="legend grid">`;return t.style.theme.cat_arr.forEach(i=>{let n=Object.assign({},t.style.default,i.style&&i.style.marker||i.style||i);n.svg||n.type?e.appendChild(x(Object.assign({legend:!0},n))):n.fillOpacity===void 0?e.appendChild(g.node`
       <svg height=24 width=24>
       <line
         x1=0 y1=12 x2=24 y2=12
@@ -141,17 +141,17 @@ var b=t=>({get:e=>t.get(e),set:(e,i)=>(t.set(e,i),i)}),j=/([^\s\\>"'=]+)\s*=\s*(
         class='label'
         style='text-anchor: start;'
         x=${c+"%"}
-        y=${n-20}>${mapp_dictionary.layer_grid_legend_min}`)),s===(o/2%1!=0&&Math.round(o/2)-1)&&(e.size_avg=i.appendChild(g.node`
+        y=${n-20}>${mapp.dictionary.layer_grid_legend_min}`)),s===(o/2%1!=0&&Math.round(o/2)-1)&&(e.size_avg=i.appendChild(g.node`
       <text
         class='label'
         style='text-anchor: middle;'
         x=${c+l/2+"%"}
-        y=${n-20}>${mapp_dictionary.layer_grid_legend_avg}`)),s===o-1&&(e.size_max=i.appendChild(g.node`
+        y=${n-20}>${mapp.dictionary.layer_grid_legend_avg}`)),s===o-1&&(e.size_max=i.appendChild(g.node`
       <text
         class='label'
         style='text-anchor: end;'
         x=${c+l+"%"}
-        y=${n-20}>${mapp_dictionary.layer_grid_legend_max}`))}n+=20;for(let s=0;s<o;s++){let d=s*l;i.appendChild(g.node`
+        y=${n-20}>${mapp.dictionary.layer_grid_legend_max}`))}n+=20;for(let s=0;s<o;s++){let d=s*l;i.appendChild(g.node`
     <rect
       height=20
       width=${l+"%"}
@@ -162,30 +162,30 @@ var b=t=>({get:e=>t.get(e),set:(e,i)=>(t.set(e,i),i)}),j=/([^\s\\>"'=]+)\s*=\s*(
         class='label'
         style='text-anchor: start;'
         x=${d+"%"}
-        y=${n+40}>${mapp_dictionary.layer_grid_legend_min}`)),s===(o/2%1!=0&&Math.round(o/2)-1)&&(e.color_avg=i.appendChild(g.node`
+        y=${n+40}>${mapp.dictionary.layer_grid_legend_min}`)),s===(o/2%1!=0&&Math.round(o/2)-1)&&(e.color_avg=i.appendChild(g.node`
       <text
         class='label'
         style='text-anchor: middle;'
         x=${d+l/2+"%"}
-        y=${n+40}>${mapp_dictionary.layer_grid_legend_avg}`)),s===o-1&&(e.color_max=i.appendChild(g.node`
+        y=${n+40}>${mapp.dictionary.layer_grid_legend_avg}`)),s===o-1&&(e.color_max=i.appendChild(g.node`
       <text
         class='label'
         style='text-anchor: end;'
         x=${d+l+"%"}
-        y=${n+40}>${mapp_dictionary.layer_grid_legend_max}`))}return e.appendChild(a.node`
+        y=${n+40}>${mapp.dictionary.layer_grid_legend_max}`))}return e.appendChild(a.node`
   <td style="padding-top: 5px;" colSpan=2>
   <label class="input-checkbox">
   <input type="checkbox"
     onchange=${s=>{t.grid_ratio=s.target.checked,t.reload()}}>
   </input>
-  <div></div><span>${mapp_dictionary.layer_grid_legend_ratio}`),e};var At={categorized:R,graduated:z,grid:q},W=t=>{if(!t.style||t.style.hidden||!t.style.theme&&!t.style.label)return;let e=t.view.appendChild(a.node`
+  <div></div><span>${mapp.dictionary.layer_grid_legend_ratio}`),e};var At={categorized:R,graduated:z,grid:q},W=t=>{if(!t.style||t.style.hidden||!t.style.theme&&!t.style.label)return;let e=t.view.appendChild(a.node`
       <div class="drawer panel expandable">`);return e.appendChild(a.node`
     <div
       class="header primary-colour"
       onclick=${o=>{o.stopPropagation(),u(o.target,!0)}}>
-      <span>${mapp_dictionary.layer_style_header}</span>
+      <span>${mapp.dictionary.layer_style_header}</span>
       <button class="btn-header xyz-icon icon-expander primary-colour-filter">`),t.style.themes&&e.appendChild(a.node`
-      <div>${mapp_dictionary.layer_style_select_theme}</div>
+      <div>${mapp.dictionary.layer_style_select_theme}</div>
       <button class="btn-drop">
       <div
         class="head"
@@ -197,21 +197,21 @@ var b=t=>({get:e=>t.get(e),set:(e,i)=>(t.set(e,i),i)}),j=/([^\s\\>"'=]+)\s*=\s*(
         ${Object.entries(t.style.themes).map(o=>a.node`
           <li onclick=${l=>{let s=l.target.closest(".btn-drop");s.querySelector("span").textContent=o[0],s.classList.toggle("active"),t.style.theme=o[1],i(t),t.reload()}}>${o[0]}`)}`),t.style.bringToFront=a.node`
       <button 
-        title=${mapp_dictionary.layer_style_bring_to_front}
+        title=${mapp.dictionary.layer_style_bring_to_front}
         style="margin-top: 5px;"
         class="btn-wide primary-colour"
-        onclick=${()=>t.bringToFront()}>${mapp_dictionary.layer_style_bring_to_front}`,!t.style.theme&&t.style.label&&e.appendChild(t.style.bringToFront),t.style.theme&&i(t),e;function i(o){o.style.legend&&o.style.legend.remove(),o.style.bringToFront.remove(),!(o.style.theme&&!o.style.theme.type)&&(o.style.legend=n(o),e.appendChild(o.style.legend),e.appendChild(o.style.bringToFront))}function n(o){return o.style.legend=a.node`<div class="legend">`,o.filter=o.filter||{},At[o.style.theme.type](o)}};var C=t=>{t.view=a.node`<div class="drawer layer-view">`;let e=t.view.appendChild(a.node`
+        onclick=${()=>t.bringToFront()}>${mapp.dictionary.layer_style_bring_to_front}`,!t.style.theme&&t.style.label&&e.appendChild(t.style.bringToFront),t.style.theme&&i(t),e;function i(o){o.style.legend&&o.style.legend.remove(),o.style.bringToFront.remove(),!(o.style.theme&&!o.style.theme.type)&&(o.style.legend=n(o),e.appendChild(o.style.legend),e.appendChild(o.style.bringToFront))}function n(o){return o.style.legend=a.node`<div class="legend">`,o.filter=o.filter||{},At[o.style.theme.type](o)}};var C=t=>{t.view=a.node`<div class="drawer layer-view">`;let e=t.view.appendChild(a.node`
     <div class="header enabled"><span>${t.name||t.key}`);e.appendChild(a.node`
     <button
-      title=${mapp_dictionary.layer_zoom_to_extent}
+      title=${mapp.dictionary.layer_zoom_to_extent}
       class="btn-header xyz-icon icon-fullscreen"
       onclick=${n=>{n.stopPropagation(),t.zoomToExtent()}}>`);let i=e.appendChild(a.node`
     <button
-      title=${mapp_dictionary.layer_visibility}
+      title=${mapp.dictionary.layer_visibility}
       class="${`btn-header xyz-icon icon-toggle ${t.display&&"on"||"off"}`}"
       onclick=${n=>{n.stopPropagation(),t.display?t.remove():t.show()}}>`);if(t.view.addEventListener("display-on",()=>{i.classList.add("on")}),t.view.addEventListener("display-off",()=>{i.classList.remove("on")}),t.meta){let n=t.view.appendChild(a.node`<p class="meta">`);n.innerHTML=t.meta}W(t),!(t.view.children.length<=1)&&(t.view.classList.add("expandable"),e.onclick=n=>{n.stopPropagation(),u(n.target,!0)},e.appendChild(a.node`
   <button
-    title=${mapp_dictionary.layer_toggle_dashboard}
+    title=${mapp.dictionary.layer_toggle_dashboard}
     class="btn-header xyz-icon icon-expander"
     onclick=${n=>{n.stopPropagation(),u(n.target)}}>`))};var U=t=>{let e={node:t.target,groups:{}};t.list.forEach(n=>{if(!n.hidden){if(C(n),!n.group){e.node.appendChild(n.view);return}e.groups[n.group]||i(n),e.groups[n.group].addLayer(n)}});function i(n){let o={list:[]};e.groups[n.group]=o;let l=e.node.appendChild(a.node`<div class="drawer layer-group expandable">`),s=l.appendChild(a.node`
       <div
@@ -220,11 +220,11 @@ var b=t=>({get:e=>t.get(e),set:(e,i)=>(t.set(e,i),i)}),j=/([^\s\\>"'=]+)\s*=\s*(
         <span>${n.group}`),d=l.appendChild(a.node`<div class="meta">`);o.chkVisibleLayer=()=>{o.list.some(r=>r.display)?c.classList.add("on"):c.classList.remove("on")},o.addLayer=r=>{if(r.groupmeta){let p=d.appendChild(a.node`<div>`);p.innerHTML=r.groupmeta}o.list.push(r),l.appendChild(r.view),o.chkVisibleLayer(),r.view.addEventListener("display-on",o.chkVisibleLayer),r.view.addEventListener("display-off",o.chkVisibleLayer)};let c=s.appendChild(a.node`
         <button
           class="btn-header xyz-icon icon-toggle"
-          title=${mapp_dictionary.layer_group_hide_layers}
+          title=${mapp.dictionary.layer_group_hide_layers}
           onclick=${r=>{if(r.stopPropagation(),r.target.classList.toggle("on"),r.target.classList.contains("on")){o.list.filter(p=>!p.display).forEach(p=>p.show());return}o.list.filter(p=>p.display).forEach(p=>p.remove())}}>`);s.appendChild(a.node`
         <button 
           class="xyz-icon btn-header icon-expander"
-          title=${mapp_dictionary.layer_group_toggle}
+          title=${mapp.dictionary.layer_group_toggle}
           onclick=${r=>{r.stopPropagation(),u(r.target)}}>`)}};var H={listview:U,layerview:C};window.mapp_ui=H;var Nt=H;export{Nt as default};
 /*! (c) Andrea Giammarchi - ISC */
 //# sourceMappingURL=ui.js.map

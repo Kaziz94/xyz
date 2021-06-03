@@ -127,8 +127,8 @@ window.onload = () => {
     hooks: true
   })
 
-  document.getElementById('layers_header').textContent = xyz.language.layers_header
-  document.getElementById('locations_header').textContent = xyz.language.locations_header
+  document.getElementById('layers_header').textContent = mapp.dictionary.layers_header
+  document.getElementById('locations_header').textContent = mapp.dictionary.locations_header
 
   xyz.workspace.get.locales().then(getLocale)
 
@@ -149,7 +149,7 @@ window.onload = () => {
     if (locales.length === 1) return
 
     layersTab.appendChild(mapp.utils.html.node`
-      <div>${xyz.language.show_layers_for_locale}</div>
+      <div>${mapp.dictionary.show_layers_for_locale}</div>
       <button class="btn-drop">
         <div class="head"
           onclick=${e => {
@@ -189,7 +189,7 @@ window.onload = () => {
       <button
         id="btnZoomIn"
         disabled=${xyz.map.getView().getZoom() >= xyz.locale.maxZoom}
-        title=${xyz.language.toolbar_zoom_in}
+        title=${mapp.dictionary.toolbar_zoom_in}
         onclick=${e => {
           const z = parseInt(xyz.map.getView().getZoom() + 1)
           xyz.map.getView().setZoom(z)
@@ -201,7 +201,7 @@ window.onload = () => {
       <button
         id="btnZoomOut"
         disabled=${xyz.map.getView().getZoom() <= xyz.locale.minZoom}
-        title=${xyz.language.toolbar_zoom_out}
+        title=${mapp.dictionary.toolbar_zoom_out}
         onclick=${e => {
           const z = parseInt(xyz.map.getView().getZoom() - 1)
           xyz.map.getView().setZoom(z)
@@ -219,7 +219,7 @@ window.onload = () => {
     btnColumn.appendChild(mapp.utils.html.node`
       <button
         class="mobile-display-none"
-        title=${xyz.language.toolbar_zoom_to_area}
+        title=${mapp.dictionary.toolbar_zoom_to_area}
         onclick=${e => {
           e.stopPropagation()
           e.target.classList.toggle('enabled')
@@ -241,7 +241,7 @@ window.onload = () => {
     // Add locator button.
     btnColumn.appendChild(mapp.utils.html.node`
       <button
-        title=${xyz.language.toolbar_current_location}
+        title=${mapp.dictionary.toolbar_current_location}
         onclick=${e => {
           xyz.mapview.locate.toggle();
           e.target.classList.toggle('enabled');
@@ -252,7 +252,7 @@ window.onload = () => {
     btnColumn.appendChild(mapp.utils.html.node`
       <button
         class="mobile-display-none"
-        title=${xyz.language.toolbar_fullscreen}
+        title=${mapp.dictionary.toolbar_fullscreen}
         onclick=${e => {
           e.target.classList.toggle('enabled')
           document.body.classList.toggle('fullscreen')
@@ -323,7 +323,7 @@ window.onload = () => {
             .filter(record => !!record.location)
             .forEach(record => record.location.remove())
         }}>
-        ${xyz.language.clear_all_locations}`)
+        ${mapp.dictionary.clear_all_locations}`)
 
     // Select locations from hooks.
     mapp.hooks.current.locations.forEach(_hook => {
@@ -348,7 +348,7 @@ window.onload = () => {
     // Append user admin button.
     xyz.user && xyz.user.admin && btnColumn.appendChild(mapp.utils.html.node`
       <a
-        title=${xyz.language.toolbar_admin}
+        title=${mapp.dictionary.toolbar_admin}
         class="mobile-display-none"
         href="${xyz.host + '/api/user/admin'}">
         <div class="xyz-icon icon-supervisor-account">`)
@@ -356,7 +356,7 @@ window.onload = () => {
     // Append logout button.
     document.head.dataset.login && btnColumn.appendChild(mapp.utils.html.node`
       <a
-        title="${xyz.user && `${xyz.language.toolbar_logout} ${xyz.user.email}` || 'Login'}"
+        title="${xyz.user && `${mapp.dictionary.toolbar_logout} ${xyz.user.email}` || 'Login'}"
         href="${xyz.user && '?logout=true' || '?login=true'}">
         <div
           class="${`xyz-icon ${xyz.user && 'icon-logout red-filter' || 'icon-lock-open primary-colour-filter'}`}">`)
