@@ -6,6 +6,9 @@
     "embedded": {
       "src": "file:views/embedded.html"
     },
+    "v4": {
+      "src": "file:views/v4.html"
+    },
     "Mapbox Base": {
       "format": "mbtiles",
       "mbStyle": "mapbox://styles/dbauszus/ciozrimi3002bdsm8bjtn2v1y",
@@ -153,6 +156,11 @@
       "layers": {
         "Mapbox Base": {
           "template": "Mapbox Base",
+          "display": true,
+          "group": "Base"
+        },
+        "Mapbox Colour": {
+          "template": "Mapbox Colour",
           "display": true,
           "group": "Base"
         },

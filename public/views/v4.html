@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head data-dir="${dir}">
+
+  <title>GEOLYTIX Skunkworks</title>
+
+  <link rel="icon" type="image/x-icon" href="${dir}/icons/favicon.ico" />
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Load openlayers library and stylesheet. -->
+    <link rel="stylesheet" href="${dir}/css/ol.css" />
+    <script src="${dir}/js/ol.js" defer></script>
+
+
+    <!-- Load maplibre-gl library required for mbtiles layer. -->
+    <script src="${dir}/js/maplibre-gl.js" defer></script>
+
+    <!-- Load XYZ / MAPP stylesheet and library. -->
+    <link rel="stylesheet" href="${dir}/css/mapp.css" />
+
+    <!-- <script src="${dir}/js/modules.js" defer></script> -->
+    <script type="module" src="http://localhost:8080/lib/mapp.js" defer></script>
+    <!-- <script type="module" src="${dir}/js/lib/mapp.js" defer></script> -->
+    
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    #Left {
+      grid-column: 1;
+      width: 100%;
+      height: 100%;
+    }
+
+    #Right {
+      grid-column: 2;
+      width: 100%;
+      height: 100%;
+    }
+
+    .ol-control button {
+      color: #000;
+      font-size: 1.5em;
+      height: 1.5em;
+      width: 1.5em;
+      background-color: #fff;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div id="Left">
+  </div>
+  <div id="Right">
+  </div>
+
+</body>
+
+<script>
+
+  window.onload = async () => {
+
+    const locale = await mapp.xhr('/api/workspace/get/locale?locale=UK')
+
+    const mapview_left = mapp.view({
+      target: document.getElementById('Left'),
+      locale: Object.assign(locale, {
+        scrollWheelZoom: true
+      })
+    })
+
+    const mapbox_base = await mapp.xhr('/api/workspace/get/layer?locale=UK&layer=Mapbox Base')
+
+    mapbox_base.mapview = mapview_left
+
+    await mapp.layer(mapbox_base)
+
+    mapbox_base.show()
+
+    const mapbox_label = await mapp.xhr('/api/workspace/get/layer?locale=UK&layer=Mapbox Label')
+
+    mapbox_label.mapview = mapview_left
+
+    await mapp.layer(mapbox_label)
+
+    mapbox_label.show()
+
+    const mapview_right = mapp.view({
+      target: document.getElementById('Right'),
+      locale: Object.assign(locale, {
+        scrollWheelZoom: true
+      })
+    })
+
+    const mapbox_colour = await mapp.xhr('/api/workspace/get/layer?locale=UK&layer=Mapbox Colour')
+
+    mapbox_colour.mapview = mapview_right
+
+    await mapp.layer(mapbox_colour)
+
+    mapbox_colour.show()
+
+  }
+
+</script>
+
+</html>
