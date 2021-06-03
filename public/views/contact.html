@@ -134,7 +134,7 @@
       })
 
       xyz.plugins()
-        .then(() => xyz.layers.load(xyz.hooks.current.layers))
+        .then(() => xyz.layers.load(mapp.hooks.current.layers))
         .catch(error => console.error(error))
 
     }

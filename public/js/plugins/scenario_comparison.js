@@ -188,10 +188,10 @@ document.dispatchEvent(new CustomEvent('scenario_comparison', {
                 const href = _xyz.host + '/view/report?' + mapp.utils.paramString(
                   Object.assign({
                     locale: _xyz.locale.key,
-                    layers: _xyz.hooks.current.layers,
-                    lat: _xyz.hooks.current.lat,
-                    lng: _xyz.hooks.current.lng,
-                    z: _xyz.hooks.current.z,
+                    layers: mapp.hooks.current.layers,
+                    lat: mapp.hooks.current.lat,
+                    lng: mapp.hooks.current.lng,
+                    z: mapp.hooks.current.z,
                     ying: _xyz.layers.list.ying.filter.current.scenario_id.eq,
                     yang: _xyz.layers.list.yang.filter.current.scenario_id.eq
                   })
@@ -248,10 +248,10 @@ document.dispatchEvent(new CustomEvent('scenario_comparison', {
         const href = _xyz.host + '/view/report?' + mapp.utils.paramString(
           Object.assign({
             locale: _xyz.locale.key,
-            layers: _xyz.hooks.current.layers,
-            lat: _xyz.hooks.current.lat,
-            lng: _xyz.hooks.current.lng,
-            z: _xyz.hooks.current.z,
+            layers: mapp.hooks.current.layers,
+            lat: mapp.hooks.current.lat,
+            lng: mapp.hooks.current.lng,
+            z: mapp.hooks.current.z,
             ying: _xyz.layers.list.ying.filter.current.scenario_id.eq,
             yang: _xyz.layers.list.yang.filter.current.scenario_id.eq
           })

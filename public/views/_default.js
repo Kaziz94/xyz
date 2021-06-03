@@ -137,9 +137,9 @@ window.onload = () => {
 
     if (!locales.length) return alert('No accessible locales')
 
-    const locale = xyz.hooks && xyz.hooks.current.locale ? {
-      key: xyz.hooks.current.locale, 
-      name: locales.find(l => l.key === xyz.hooks.current.locale).name
+    const locale = mapp.hooks && mapp.hooks.current.locale ? {
+      key: mapp.hooks.current.locale, 
+      name: locales.find(l => l.key === mapp.hooks.current.locale).name
     } : locales[0];
 
     xyz.workspace.get.locale({
@@ -162,7 +162,7 @@ window.onload = () => {
         <ul>${locales.map(_locale => mapp.utils.html.node`
             <li>
               <a href="${xyz.host + '?locale=' + _locale.key + 
-                `${xyz.hooks.current.language && '&language=' + xyz.hooks.current.language || ''}`}">
+                `${mapp.hooks.current.language && '&language=' + mapp.hooks.current.language || ''}`}">
               ${_locale.name || _locale.key}`)}`)
 
   }
@@ -326,7 +326,7 @@ window.onload = () => {
         ${xyz.language.clear_all_locations}`)
 
     // Select locations from hooks.
-    xyz.hooks.current.locations.forEach(_hook => {
+    mapp.hooks.current.locations.forEach(_hook => {
 
       const hook = _hook.split('!');
 

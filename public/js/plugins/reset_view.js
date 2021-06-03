@@ -12,7 +12,7 @@ document.dispatchEvent(new CustomEvent('reset_view', {
         onclick=${e => {
           
           if(confirm('Initial app view is about to be restored. Are you sure?')) {
-            _xyz.hooks.removeAll() 
+            mapp.hooks.removeAll() 
             location.reload()
           }
         
