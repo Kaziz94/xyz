@@ -1,4 +1,4 @@
-window.onload = () => {
+window.onload = async () => {
 
   if ('scrollRestoration' in history) history.scrollRestoration = 'auto'
 
@@ -121,251 +121,227 @@ window.onload = () => {
 
   const btnColumn = document.getElementById('mapButton')
 
-  // Initialize xyz object
-  const xyz = _xyz({
-    host: document.head.dataset.dir || new String(''),
-    hooks: true
-  })
-
   document.getElementById('layers_header').textContent = mapp.dictionary.layers_header
   document.getElementById('locations_header').textContent = mapp.dictionary.locations_header
 
-  xyz.workspace.get.locales().then(getLocale)
+  const host = document.head.dataset.dir || new String('')
 
-  // Get locale from host.
-  function getLocale(locales) {
+  const locales = await mapp.xhr(`${host}/api/workspace/get/locales`)
 
-    if (!locales.length) return alert('No accessible locales')
+  if (!locales.length) return alert('No accessible locales')
 
-    const locale = mapp.hooks && mapp.hooks.current.locale ? {
-      key: mapp.hooks.current.locale, 
-      name: locales.find(l => l.key === mapp.hooks.current.locale).name
-    } : locales[0];
+  const locale = await mapp.xhr(`${host}/api/workspace/get/locale?locale=${mapp.hooks.current.locale || locales[0].key}`)
 
-    xyz.workspace.get.locale({
-      locale: locale.key
-    }).then(createMap)
+  locales.length > 1 && layersTab.appendChild(mapp.utils.html.node`
+  <div>${mapp.dictionary.show_layers_for_locale}</div>
+  <button class="btn-drop">
+    <div class="head"
+      onclick=${e => {
+        e.preventDefault()
+        e.target.parentElement.classList.toggle('active')
+      }}>
+      <span>${locale.name}</span>
+      <div class="icon"></div>
+    </div>
+    <ul>${locales.map(locale => mapp.utils.html.node`
+        <li>
+          <a href="${host + '?locale=' + locale.key + 
+            `${mapp.hooks.current.language && '&language=' + mapp.hooks.current.language || ''}`}">
+            ${locale.name}`)}`)
 
-    if (locales.length === 1) return
+  const mapview = mapp.mapview({
+    host: host,
+    target: OL,
+    locale: Object.assign(locale, {
+      scrollWheelZoom: true
+    }),
+    attribution: {
+      target: document.querySelector('#Attribution > .attribution'),
+      links: {
+        [`XYZ v${mapp.version}`]: 'https://geolytix.github.io/xyz',
+        Openlayers: 'https://openlayers.org'
+      }
+    },
+  })
 
-    layersTab.appendChild(mapp.utils.html.node`
-      <div>${mapp.dictionary.show_layers_for_locale}</div>
-      <button class="btn-drop">
-        <div class="head"
-          onclick=${e => {
-            e.preventDefault()
-            e.target.parentElement.classList.toggle('active')
-          }}>
-          <span>${locale.name || locale.key}</span>
-          <div class="icon"></div>
-        </div>
-        <ul>${locales.map(_locale => mapp.utils.html.node`
-            <li>
-              <a href="${xyz.host + '?locale=' + _locale.key + 
-                `${mapp.hooks.current.language && '&language=' + mapp.hooks.current.language || ''}`}">
-              ${_locale.name || _locale.key}`)}`)
+  const layers = await mapview.addLayers(locale.layers)
+  
+  layers.forEach(layer => layer.display && layer.show())
 
-  }
+  mapview.layers['ZoomGeom'].show()
 
-  // Create map element.
-  function createMap(locale) {
+  mapp.ui.listview({
+    target: layersTab,
+    list: layers
+  })
 
-    xyz.locale = locale
+  // Add zoomIn button.
+  const btnZoomIn = btnColumn.appendChild(mapp.utils.html.node `
+    <button
+      id="btnZoomIn"
+      .disabled=${mapview.getZoom() >= mapview.locale.maxZoom}
+      title=${mapp.dictionary.toolbar_zoom_in}
+      onclick=${e => {
+        const z = parseInt(mapview.getZoom() + 1)
+        mapview.Map.getView().setZoom(z)
+        e.target.disabled = (z >= mapview.locale.maxZoom)
+      }}><div class="xyz-icon icon-add">`)
 
-    xyz.mapview.create({
-      target: OL,
-      attribution: {
-        target: document.querySelector('#Attribution > .attribution'),
-        links: {
-          [`XYZ v${xyz.version}`]: 'https://geolytix.github.io/xyz',
-          Openlayers: 'https://openlayers.org'
-        }
-      },
-      scrollWheelZoom: true,
-    })
+  // Add zoomOut button.
+  const btnZoomOut = btnColumn.appendChild(mapp.utils.html.node`
+    <button
+      id="btnZoomOut"
+      .disabled=${mapview.getZoom() <= mapview.locale.minZoom}
+      title=${mapp.dictionary.toolbar_zoom_out}
+      onclick=${e => {
+        const z = parseInt(mapview.getZoom() - 1)
+        mapview.Map.getView().setZoom(z)
+        e.target.disabled = (z <= mapview.locale.minZoom)
+      }}><div class="xyz-icon icon-remove">`)
 
-    // Add zoomIn button.
-    const btnZoomIn = btnColumn.appendChild(mapp.utils.html.node `
-      <button
-        id="btnZoomIn"
-        disabled=${xyz.map.getView().getZoom() >= xyz.locale.maxZoom}
-        title=${mapp.dictionary.toolbar_zoom_in}
-        onclick=${e => {
-          const z = parseInt(xyz.map.getView().getZoom() + 1)
-          xyz.map.getView().setZoom(z)
-          e.target.disabled = (z >= xyz.locale.maxZoom)
-        }}><div class="xyz-icon icon-add">`)
+  // changeEnd event listener for zoom button.
+  OL.addEventListener('changeEnd', () => {
+    const z = mapview.getZoom()
+    btnZoomIn.disabled = z >= mapview.locale.maxZoom
+    btnZoomOut.disabled = z <= mapview.locale.minZoom
+  })
 
-    // Add zoomOut button.
-    const btnZoomOut = btnColumn.appendChild(mapp.utils.html.node`
-      <button
-        id="btnZoomOut"
-        disabled=${xyz.map.getView().getZoom() <= xyz.locale.minZoom}
-        title=${mapp.dictionary.toolbar_zoom_out}
-        onclick=${e => {
-          const z = parseInt(xyz.map.getView().getZoom() - 1)
-          xyz.map.getView().setZoom(z)
-          e.target.disabled = (z <= xyz.locale.minZoom)
-        }}><div class="xyz-icon icon-remove">`)
 
-    // changeEnd event listener for zoom button.
-    OL.addEventListener('changeEnd', () => {
-      const z = xyz.map.getView().getZoom()
-      btnZoomIn.disabled = z >= xyz.locale.maxZoom
-      btnZoomOut.disabled = z <= xyz.locale.minZoom
-    })
+  // Add zoom to area button.
+  // btnColumn.appendChild(mapp.utils.html.node`
+  //   <button
+  //     class="mobile-display-none"
+  //     title=${mapp.dictionary.toolbar_zoom_to_area}
+  //     onclick=${e => {
+  //       e.stopPropagation()
+  //       e.target.classList.toggle('enabled')
 
-    // Add zoom to area button.
-    btnColumn.appendChild(mapp.utils.html.node`
-      <button
-        class="mobile-display-none"
-        title=${mapp.dictionary.toolbar_zoom_to_area}
-        onclick=${e => {
-          e.stopPropagation()
-          e.target.classList.toggle('enabled')
+  //       if (e.target.classList.contains('enabled')) {
 
-          if (e.target.classList.contains('enabled')) {
+  //         return xyz.mapview.interaction.zoom.begin({
+  //           callback: () => {
+  //             e.target.classList.remove('enabled')
+  //           }
+  //         })
+  //       }
 
-            return xyz.mapview.interaction.zoom.begin({
-              callback: () => {
-                e.target.classList.remove('enabled')
-              }
-            })
-          }
+  //       xyz.mapview.interaction.zoom.cancel()
 
-          xyz.mapview.interaction.zoom.cancel()
+  //     }}>
+  //     <div class="xyz-icon icon-pageview">`)
 
-        }}>
-        <div class="xyz-icon icon-pageview">`)
+  // Add locator button.
+  // btnColumn.appendChild(mapp.utils.html.node`
+  //   <button
+  //     title=${mapp.dictionary.toolbar_current_location}
+  //     onclick=${e => {
+  //       xyz.mapview.locate.toggle();
+  //       e.target.classList.toggle('enabled');
+  //     }}>
+  //     <div class="xyz-icon icon-gps-not-fixed">`)
 
-    // Add locator button.
-    btnColumn.appendChild(mapp.utils.html.node`
-      <button
-        title=${mapp.dictionary.toolbar_current_location}
-        onclick=${e => {
-          xyz.mapview.locate.toggle();
-          e.target.classList.toggle('enabled');
-        }}>
-        <div class="xyz-icon icon-gps-not-fixed">`)
-
-    // Add fullscreen button.
-    btnColumn.appendChild(mapp.utils.html.node`
-      <button
-        class="mobile-display-none"
-        title=${mapp.dictionary.toolbar_fullscreen}
-        onclick=${e => {
-          e.target.classList.toggle('enabled')
-          document.body.classList.toggle('fullscreen')
-          xyz.map.updateSize()
-          Object.values(xyz.layers.list).forEach(layer => {
-            layer.mbMap?.resize()
-          })
-        }}>
-        <div class="xyz-icon icon-map">`)
-
-    xyz.plugins()
-      .then(() => xyz.layers.load())
-      .then(() => mappUI())
-      .catch(error => console.error(error))
-  }
-
-  // Initialise listview controls.
-  function mappUI() {
+  // Add fullscreen button.
+  // btnColumn.appendChild(mapp.utils.html.node`
+  //   <button
+  //     class="mobile-display-none"
+  //     title=${mapp.dictionary.toolbar_fullscreen}
+  //     onclick=${e => {
+  //       e.target.classList.toggle('enabled')
+  //       document.body.classList.toggle('fullscreen')
+  //       xyz.map.updateSize()
+  //       Object.values(xyz.layers.list).forEach(layer => {
+  //         layer.mbMap?.resize()
+  //       })
+  //     }}>
+  //     <div class="xyz-icon icon-map">`)
 
     // Add gazetteer control.
-    if (xyz.locale.gazetteer) {
+    // if (xyz.locale.gazetteer) {
 
-      const gazetteer = document.getElementById('gazetteer')
+    //   const gazetteer = document.getElementById('gazetteer')
         
-      const btnGazetteer = btnColumn.insertBefore(mapp.utils.html.node`
-        <button id="btnGazetteer"
-          onclick=${e => {
-            e.preventDefault()
-            btnGazetteer.classList.toggle('enabled')
-            btnGazetteer.classList.toggle('mobile-hidden')
-            gazetteer.classList.toggle('display-none')
-            gazetteer.querySelector('input').focus()
-          }}><div class="xyz-icon icon-search">`, btnColumn.firstChild)
+    //   const btnGazetteer = btnColumn.insertBefore(mapp.utils.html.node`
+    //     <button id="btnGazetteer"
+    //       onclick=${e => {
+    //         e.preventDefault()
+    //         btnGazetteer.classList.toggle('enabled')
+    //         btnGazetteer.classList.toggle('mobile-hidden')
+    //         gazetteer.classList.toggle('display-none')
+    //         gazetteer.querySelector('input').focus()
+    //       }}><div class="xyz-icon icon-search">`, btnColumn.firstChild)
         
-      document.getElementById('closeGazetteer').onclick = e => {
-        e.preventDefault()
-        btnGazetteer.classList.toggle('enabled')
-        btnGazetteer.classList.toggle('mobile-hidden')
-        gazetteer.classList.toggle('display-none')
-      }
+    //   document.getElementById('closeGazetteer').onclick = e => {
+    //     e.preventDefault()
+    //     btnGazetteer.classList.toggle('enabled')
+    //     btnGazetteer.classList.toggle('mobile-hidden')
+    //     gazetteer.classList.toggle('display-none')
+    //   }
           
-      xyz.gazetteer.init({
-        group: gazetteer.querySelector('.input-drop')
-      })
+    //   xyz.gazetteer.init({
+    //     group: gazetteer.querySelector('.input-drop')
+    //   })
           
-    }
+    // }
 
-    xyz.tabview.init({
-      node: document.getElementById('tabview')
-    })
+    // xyz.tabview.init({
+    //   node: document.getElementById('tabview')
+    // })
 
-    mapp.ui.listview({
-      target: layersTab,
-      list: Object.values(xyz.layers.list)
-    })
-
-    xyz.locations.listview.init({
-      target: locationsTab
-    })
+    // xyz.locations.listview.init({
+    //   target: locationsTab
+    // })
 
     // Add clear all location button.
-    locationsTab.appendChild(mapp.utils.html.node`
-      <button 
-        class="tab-display bold primary-colour"
-        onclick=${e => {
-          e.preventDefault()
-          xyz.locations.list
-            .filter(record => !!record.location)
-            .forEach(record => record.location.remove())
-        }}>
-        ${mapp.dictionary.clear_all_locations}`)
+    // locationsTab.appendChild(mapp.utils.html.node`
+    //   <button 
+    //     class="tab-display bold primary-colour"
+    //     onclick=${e => {
+    //       e.preventDefault()
+    //       xyz.locations.list
+    //         .filter(record => !!record.location)
+    //         .forEach(record => record.location.remove())
+    //     }}>
+    //     ${mapp.dictionary.clear_all_locations}`)
 
     // Select locations from hooks.
-    mapp.hooks.current.locations.forEach(_hook => {
+    // mapp.hooks.current.locations.forEach(_hook => {
 
-      const hook = _hook.split('!');
+    //   const hook = _hook.split('!');
 
-      xyz.locations.select({
-        locale: xyz.locale.key,
-        layer: xyz.layers.list[decodeURIComponent(hook[0])],
-        table: hook[1],
-        id: hook[2]
-      })
-    })
+    //   xyz.locations.select({
+    //     locale: xyz.locale.key,
+    //     layer: xyz.layers.list[decodeURIComponent(hook[0])],
+    //     table: hook[1],
+    //     id: hook[2]
+    //   })
+    // })
 
-    xyz.user = document.head.dataset.user && JSON.parse(decodeURI(document.head.dataset.user))
+  mapp.user = document.head.dataset.user && JSON.parse(decodeURI(document.head.dataset.user))
 
-    xyz.user && mapp.ui.idle({
-      host: xyz.host,
-      idle: xyz.locale.idle ?? 600
-    })
+  mapp.user && mapp.ui.idle({
+    host: mapview.host,
+    idle: mapview.locale.idle ?? 600
+  })
 
-    // Append user admin button.
-    xyz.user && xyz.user.admin && btnColumn.appendChild(mapp.utils.html.node`
-      <a
-        title=${mapp.dictionary.toolbar_admin}
-        class="mobile-display-none"
-        href="${xyz.host + '/api/user/admin'}">
-        <div class="xyz-icon icon-supervisor-account">`)
+  // Append user admin button.
+  mapp.user && mapp.user.admin && btnColumn.appendChild(mapp.utils.html.node`
+    <a
+      title=${mapp.dictionary.toolbar_admin}
+      class="mobile-display-none"
+      href="${xyz.host + '/api/user/admin'}">
+      <div class="xyz-icon icon-supervisor-account">`)
 
-    // Append logout button.
-    document.head.dataset.login && btnColumn.appendChild(mapp.utils.html.node`
-      <a
-        title="${xyz.user && `${mapp.dictionary.toolbar_logout} ${xyz.user.email}` || 'Login'}"
-        href="${xyz.user && '?logout=true' || '?login=true'}">
-        <div
-          class="${`xyz-icon ${xyz.user && 'icon-logout red-filter' || 'icon-lock-open primary-colour-filter'}`}">`)
+  // Append logout button.
+  document.head.dataset.login && btnColumn.appendChild(mapp.utils.html.node`
+    <a
+      title="${mapp.user && `${mapp.dictionary.toolbar_logout} ${xyz.user.email}` || 'Login'}"
+      href="${mapp.user && '?logout=true' || '?login=true'}">
+      <div
+        class="${`xyz-icon ${mapp.user && 'icon-logout red-filter' || 'icon-lock-open primary-colour-filter'}`}">`)
 
 
-    // Append spacer for tableview
-    btnColumn.appendChild(mapp.utils.html.node`
-      <div style="height: 60px;">`)
-
-  }
+  // Append spacer for tableview
+  btnColumn.appendChild(mapp.utils.html.node`
+    <div style="height: 60px;">`)
 
 }
