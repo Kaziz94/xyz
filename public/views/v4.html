@@ -84,21 +84,10 @@
       })
     })
 
-    const mapbox_base = await mapp.xhr('/api/workspace/get/layer?locale=UK&layer=Mapbox Base')
+    await mapview_left.addLayers(locale.layers)
+      .then(layers => layers.forEach(layer => layer.display && layer.show()))
 
-    mapbox_base.mapview = mapview_left
-
-    await mapp.layer(mapbox_base)
-
-    mapbox_base.show()
-
-    const mapbox_label = await mapp.xhr('/api/workspace/get/layer?locale=UK&layer=Mapbox Label')
-
-    mapbox_label.mapview = mapview_left
-
-    await mapp.layer(mapbox_label)
-
-    mapbox_label.show()
+    mapview_left.layers['ZoomGeom'].show()
 
     const mapview_right = mapp.view({
       target: document.getElementById('Right'),

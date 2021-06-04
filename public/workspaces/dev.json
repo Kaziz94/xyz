@@ -161,7 +161,6 @@
         },
         "Mapbox Colour": {
           "template": "Mapbox Colour",
-          "display": true,
           "group": "Base"
         },
         "HERE Imagery": {
