@@ -155,6 +155,7 @@ window.onload = async () => {
     locale: Object.assign(locale, {
       scrollWheelZoom: true
     }),
+    hooks: true,
     attribution: {
       target: document.querySelector('#Attribution > .attribution'),
       links: {
@@ -164,11 +165,14 @@ window.onload = async () => {
     },
   })
 
-  const layers = await mapview.addLayers(locale.layers)
+  const layers = await mapview.getLayers(locale.layers)
+
+  await mapview.addLayers(layers)
+
+  // Set layer display according to the url hook if defined.
+  mapp.hooks.current.layers.length && layers.forEach(layer => layer.display = !!~mapp.hooks.current.layers.indexOf(layer.key))
   
   layers.forEach(layer => layer.display && layer.show())
-
-  mapview.layers['ZoomGeom'].show()
 
   mapp.ui.listview({
     target: layersTab,
@@ -328,13 +332,13 @@ window.onload = async () => {
     <a
       title=${mapp.dictionary.toolbar_admin}
       class="mobile-display-none"
-      href="${xyz.host + '/api/user/admin'}">
+      href="${mapp.host + '/api/user/admin'}">
       <div class="xyz-icon icon-supervisor-account">`)
 
   // Append logout button.
   document.head.dataset.login && btnColumn.appendChild(mapp.utils.html.node`
     <a
-      title="${mapp.user && `${mapp.dictionary.toolbar_logout} ${xyz.user.email}` || 'Login'}"
+      title="${mapp.user && `${mapp.dictionary.toolbar_logout} ${mapp.user.email}` || 'Login'}"
       href="${mapp.user && '?logout=true' || '?login=true'}">
       <div
         class="${`xyz-icon ${mapp.user && 'icon-logout red-filter' || 'icon-lock-open primary-colour-filter'}`}">`)
