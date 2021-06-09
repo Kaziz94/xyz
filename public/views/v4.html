@@ -75,28 +75,34 @@
 
   window.onload = async () => {
 
-    const locale = await mapp.xhr('/api/workspace/get/locale?locale=UK')
+    const locale = await mapp.xhr('/dev/api/workspace/get/locale?locale=UK')
 
-    const mapview_left = mapp.view({
+    const layers = await mapp.utils.promiseAll(locale.layers.map(layer => mapp.xhr('/dev/api/workspace/get/layer?locale=UK&layer='+layer)))
+
+    const mapview_left = mapp.mapview({
+      host: '/dev',
+      hooks: true,
       target: document.getElementById('Left'),
       locale: Object.assign(locale, {
         scrollWheelZoom: true
       })
     })
 
-    await mapview_left.addLayers(locale.layers)
-      .then(layers => layers.forEach(layer => layer.display && layer.show()))
+    await mapview_left.addLayers(layers)
+
+    layers.forEach(layer => layer.display && layer.show())
 
     mapview_left.layers['ZoomGeom'].show()
 
-    const mapview_right = mapp.view({
+    const mapview_right = mapp.mapview({
+      host: '/dev',
       target: document.getElementById('Right'),
       locale: Object.assign(locale, {
         scrollWheelZoom: true
       })
     })
 
-    const mapbox_colour = await mapp.xhr('/api/workspace/get/layer?locale=UK&layer=Mapbox Colour')
+    const mapbox_colour = await mapp.xhr('/dev/api/workspace/get/layer?locale=UK&layer=Mapbox Colour')
 
     mapbox_colour.mapview = mapview_right
 
