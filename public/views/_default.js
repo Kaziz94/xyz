@@ -165,6 +165,10 @@ window.onload = async () => {
     },
   })
 
+  mapp.interactions.highlight(mapview)
+
+  mapview.interactions.draw()
+
   // const layers = await mapview.getLayers(locale.layers)
 
   const layers = await mapp.utils.promiseAll(locale.layers.map(layer => mapp.xhr(`${host}/api/workspace/get/layer?locale=${locale.key}&layer=${layer}`)))
