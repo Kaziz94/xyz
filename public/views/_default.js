@@ -167,23 +167,27 @@ window.onload = async () => {
 
   mapp.interactions.highlight(mapview)
 
-  mapview.interactions.draw()
-
   // const layers = await mapview.getLayers(locale.layers)
 
   const layers = await mapp.utils.promiseAll(locale.layers.map(layer => mapp.xhr(`${host}/api/workspace/get/layer?locale=${locale.key}&layer=${layer}`)))
 
-  await mapview.addLayers(layers)
+  await mapview.layers.add(layers)
 
   // Set layer display according to the url hook if defined.
   mapp.hooks.current.layers.length && layers.forEach(layer => layer.display = !!~mapp.hooks.current.layers.indexOf(layer.key))
   
   layers.forEach(layer => layer.display && layer.show())
 
-  mapp.ui.listview({
+  mapp.ui.layer.listview({
     target: layersTab,
     list: layers
   })
+
+  mapview.locations.listview = mapp.ui.location.listview({
+    target: locationsTab
+  })
+
+
 
   // Add zoomIn button.
   const btnZoomIn = btnColumn.appendChild(mapp.utils.html.node `
@@ -297,9 +301,7 @@ window.onload = async () => {
     //   node: document.getElementById('tabview')
     // })
 
-    // xyz.locations.listview.init({
-    //   target: locationsTab
-    // })
+
 
     // Add clear all location button.
     // locationsTab.appendChild(mapp.utils.html.node`
