@@ -187,6 +187,10 @@ window.onload = async () => {
     target: locationsTab
   })
 
+  mapview.tabview = mapp.ui.tabview({
+    target: document.getElementById('tabview')
+  })
+
 
 
   // Add zoomIn button.
@@ -297,9 +301,6 @@ window.onload = async () => {
           
     // }
 
-    // xyz.tabview.init({
-    //   node: document.getElementById('tabview')
-    // })
 
 
 
