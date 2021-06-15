@@ -75,9 +75,9 @@
 
   window.onload = async () => {
 
-    const locale = await mapp.xhr('/dev/api/workspace/get/locale?locale=UK')
+    const locale = await mapp.utils.xhr('/dev/api/workspace/get/locale?locale=UK')
 
-    const layers = await mapp.utils.promiseAll(locale.layers.map(layer => mapp.xhr('/dev/api/workspace/get/layer?locale=UK&layer='+layer)))
+    const layers = await mapp.utils.promiseAll(locale.layers.map(layer => mapp.utils.xhr('/dev/api/workspace/get/layer?locale=UK&layer='+layer)))
 
     const mapview_left = mapp.mapview({
       host: '/dev',
@@ -102,7 +102,7 @@
       })
     })
 
-    const mapbox_colour = await mapp.xhr('/dev/api/workspace/get/layer?locale=UK&layer=Mapbox Colour')
+    const mapbox_colour = await mapp.utils.xhr('/dev/api/workspace/get/layer?locale=UK&layer=Mapbox Colour')
 
     mapbox_colour.mapview = mapview_right
 

@@ -126,11 +126,11 @@ window.onload = async () => {
 
   const host = document.head.dataset.dir || new String('')
 
-  const locales = await mapp.xhr(`${host}/api/workspace/get/locales`)
+  const locales = await mapp.utils.xhr(`${host}/api/workspace/get/locales`)
 
   if (!locales.length) return alert('No accessible locales')
 
-  const locale = await mapp.xhr(`${host}/api/workspace/get/locale?locale=${mapp.hooks.current.locale || locales[0].key}`)
+  const locale = await mapp.utils.xhr(`${host}/api/workspace/get/locale?locale=${mapp.hooks.current.locale || locales[0].key}`)
 
   locales.length > 1 && layersTab.appendChild(mapp.utils.html.node`
   <div>${mapp.dictionary.show_layers_for_locale}</div>
@@ -169,7 +169,7 @@ window.onload = async () => {
 
   // const layers = await mapview.getLayers(locale.layers)
 
-  const layers = await mapp.utils.promiseAll(locale.layers.map(layer => mapp.xhr(`${host}/api/workspace/get/layer?locale=${locale.key}&layer=${layer}`)))
+  const layers = await mapp.utils.promiseAll(locale.layers.map(layer => mapp.utils.xhr(`${host}/api/workspace/get/layer?locale=${locale.key}&layer=${layer}`)))
 
   await mapview.layers.add(layers)
 
