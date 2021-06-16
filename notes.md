@@ -1,7 +1,62 @@
-v3.5.2
+v4
 
-Plugin load module [#406](https://github.com/GEOLYTIX/xyz/issues/406)
+mapp
+  version 
+  hooks
+  plugins
+  dictionary
+  dictionaries
+  mapview
+  layer
+  location
+  utils
+    paramString
+    promiseAll
+    dataURLtoBlob
+    xhr
+    icon
+    loadPlugins
+    getCircularReplacer
+    isolineHereDecode
+    chroma
+    nanoid
+    render
+    html
+    svg
+    turf
+      pointOnFeature
+      kinks
+      flatten
+      circle
+    lodash
+      merge
+      cloneDeep
+  ui
+    layers
+      view
+      listview
+    locations
+      view
+      infoj
+      listview
+    dataview
+    tabview
+    toggleExpanderParent
+    aColorPicker
+    flatpickr
+    formatDate
+    formatDateTime
+    meltDateStr
+    idle
 
-Custom user agent for node-fetch [#407](https://github.com/GEOLYTIX/xyz/issues/407)
-
-Mapview icons will be memoized.
+mapview
+  host
+  hooks
+  locale
+  interaction
+  interactions
+    highlight
+    draw
+  layers
+  locations
+  Map

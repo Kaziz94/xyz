@@ -169,7 +169,7 @@ window.onload = async () => {
     },
   })
 
-  mapp.interactions.highlight(mapview)
+  mapview.interactions.highlight()
 
   // const layers = await mapview.getLayers(locale.layers)
 
@@ -345,7 +345,7 @@ window.onload = async () => {
     <a
       title=${mapp.dictionary.toolbar_admin}
       class="mobile-display-none"
-      href="${mapp.host + '/api/user/admin'}">
+      href="${mapview.host + '/api/user/admin'}">
       <div class="xyz-icon icon-supervisor-account">`)
 
   // Append logout button.
