@@ -598,7 +598,7 @@ function init(_xyz) {
               },
               zIndex: 2000,
               style: new _xyz.mapview.lib.style.Style({
-                image: mapp.icon({
+                image: mapp.utils.icon({
                   url: "https://raw.githubusercontent.com/GEOLYTIX/MapIcons/master/poi_pin_filled/poi_simple_pin.svg",
                   scale: 0.05,
                   anchor: [0.5, 1]

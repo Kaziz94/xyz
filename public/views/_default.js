@@ -126,6 +126,10 @@ window.onload = async () => {
 
   const host = document.head.dataset.dir || new String('')
 
+  Object.assign(
+    mapp.dictionary,
+    mapp.hooks?.current?.language && mapp.dictionaries[hooks.current.language] || {})
+
   const locales = await mapp.utils.xhr(`${host}/api/workspace/get/locales`)
 
   if (!locales.length) return alert('No accessible locales')
@@ -178,12 +182,12 @@ window.onload = async () => {
   
   layers.forEach(layer => layer.display && layer.show())
 
-  mapp.ui.layer.listview({
+  mapp.ui.layers.listview({
     target: layersTab,
     list: layers
   })
 
-  mapview.locations.listview = mapp.ui.location.listview({
+  mapview.locations.listview = mapp.ui.locations.listview({
     target: locationsTab
   })
 

@@ -64,7 +64,7 @@ export default _xyz => {
     })
 
     const drawStyle = new ol.style.Style({
-      image: params.style.image && mapp.icon(params.style.image) ||
+      image: params.style.image && mapp.utils.icon(params.style.image) ||
         new ol.style.Circle({
           fill: fill,
           stroke: stroke,
