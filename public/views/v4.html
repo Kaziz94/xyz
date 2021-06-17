@@ -75,12 +75,12 @@
 
   window.onload = async () => {
 
-    const locale = await mapp.utils.xhr('/dev/api/workspace/get/locale?locale=UK')
+    const locale = await mapp.utils.xhr('/mapp/api/workspace/get/locale?locale=UK')
 
-    const layers = await mapp.utils.promiseAll(locale.layers.map(layer => mapp.utils.xhr('/dev/api/workspace/get/layer?locale=UK&layer='+layer)))
+    const layers = await mapp.utils.promiseAll(locale.layers.map(layer => mapp.utils.xhr('/mapp/api/workspace/get/layer?locale=UK&layer='+layer)))
 
     const mapview_left = mapp.mapview({
-      host: '/dev',
+      host: '/mapp',
       hooks: true,
       target: document.getElementById('Left'),
       locale: Object.assign(locale, {
@@ -88,27 +88,42 @@
       })
     })
 
-    await mapview_left.addLayers(layers)
+    await mapview_left.layers.add(layers)
 
-    layers.forEach(layer => layer.display && layer.show())
+    //layers.forEach(layer => layer.display && layer.show())
+    Object.values(mapview_left.layers.list).forEach(layer => layer.display && layer.show())
 
-    mapview_left.layers['ZoomGeom'].show()
+    mapview_left.layers.list['Grocery'].show()
+
+    mapview_left.interactions.highlight()
+
+    // mapview_left.layers['ZoomGeom'].show()
 
     const mapview_right = mapp.mapview({
-      host: '/dev',
+      host: '/mapp',
       target: document.getElementById('Right'),
       locale: Object.assign(locale, {
         scrollWheelZoom: true
       })
     })
 
-    const mapbox_colour = await mapp.utils.xhr('/dev/api/workspace/get/layer?locale=UK&layer=Mapbox Colour')
+    await mapview_right.layers.add(layers)
 
-    mapbox_colour.mapview = mapview_right
+    //layers.forEach(layer => layer.display && layer.show())
+    Object.values(mapview_right.layers.list).forEach(layer => layer.display && layer.show())
 
-    await mapp.layer(mapbox_colour)
+    mapview_right.layers.list['Pizza Places'].show()
 
-    mapbox_colour.show()
+    mapview_right.interactions.highlight()
+    
+
+    // const mapbox_colour = await mapp.utils.xhr('/dev/api/workspace/get/layer?locale=UK&layer=Mapbox Colour')
+
+    // mapbox_colour.mapview = mapview_right
+
+    // await mapp.layer(mapbox_colour)
+
+    // mapbox_colour.show()
 
   }
 

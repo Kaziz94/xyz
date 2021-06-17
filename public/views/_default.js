@@ -180,15 +180,16 @@ window.onload = async () => {
   // Set layer display according to the url hook if defined.
   mapp.hooks.current.layers.length && layers.forEach(layer => layer.display = !!~mapp.hooks.current.layers.indexOf(layer.key))
   
-  layers.forEach(layer => layer.display && layer.show())
+  Object.values(mapview.layers.list).forEach(layer => layer.display && layer.show())
 
   mapp.ui.layers.listview({
     target: layersTab,
-    list: layers
+    mapview: mapview
   })
 
-  mapview.locations.listview = mapp.ui.locations.listview({
-    target: locationsTab
+  mapp.ui.locations.listview({
+    target: locationsTab,
+    mapview: mapview
   })
 
   mapview.tabview = mapp.ui.tabview({
