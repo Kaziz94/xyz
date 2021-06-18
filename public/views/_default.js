@@ -178,7 +178,7 @@ window.onload = async () => {
   await mapview.layers.add(layers)
 
   // Set layer display according to the url hook if defined.
-  mapp.hooks.current.layers.length && layers.forEach(layer => layer.display = !!~mapp.hooks.current.layers.indexOf(layer.key))
+  mapp.hooks.current.layers.length && Object.values(mapview.layers.list).forEach(layer => layer.display = !!~mapp.hooks.current.layers.indexOf(layer.key))
   
   Object.values(mapview.layers.list).forEach(layer => layer.display && layer.show())
 
@@ -192,11 +192,10 @@ window.onload = async () => {
     mapview: mapview
   })
 
-  mapview.tabview = mapp.ui.tabview({
-    target: document.getElementById('tabview')
+  mapp.ui.tabview({
+    target: document.getElementById('tabview'),
+    mapview: mapview
   })
-
-
 
   // Add zoomIn button.
   const btnZoomIn = btnColumn.appendChild(mapp.utils.html.node `
