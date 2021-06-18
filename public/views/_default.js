@@ -192,6 +192,20 @@ window.onload = async () => {
     mapview: mapview
   })
 
+
+  // Select locations from hooks.
+  mapp.hooks.current.locations.forEach(_hook => {
+
+    const hook = _hook.split('!');
+
+    mapview.locations.select({
+      locale: mapview.locale.key,
+      layer: mapview.layers.list[decodeURIComponent(hook[0])],
+      table: hook[1],
+      id: hook[2]
+    })
+  })
+
   mapp.ui.tabview({
     target: document.getElementById('tabview'),
     mapview: mapview
@@ -320,18 +334,6 @@ window.onload = async () => {
     //     }}>
     //     ${mapp.dictionary.clear_all_locations}`)
 
-    // Select locations from hooks.
-    // mapp.hooks.current.locations.forEach(_hook => {
-
-    //   const hook = _hook.split('!');
-
-    //   xyz.locations.select({
-    //     locale: xyz.locale.key,
-    //     layer: xyz.layers.list[decodeURIComponent(hook[0])],
-    //     table: hook[1],
-    //     id: hook[2]
-    //   })
-    // })
 
   mapp.user = document.head.dataset.user && JSON.parse(decodeURI(document.head.dataset.user))
 
