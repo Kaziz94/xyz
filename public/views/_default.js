@@ -192,6 +192,17 @@ window.onload = async () => {
     mapview: mapview
   })
 
+  // Add clear all location button.
+  locationsTab.appendChild(mapp.utils.html.node`
+    <button 
+      class="tab-display bold primary-colour"
+      onclick=${e => {
+        e.preventDefault()
+        Object.values(mapview.locations.list)
+          .forEach(location => location.remove())
+      }}>
+      ${mapp.dictionary.clear_all_locations}`)
+
 
   // Select locations from hooks.
   mapp.hooks.current.locations.forEach(_hook => {
@@ -318,21 +329,6 @@ window.onload = async () => {
     //   })
           
     // }
-
-
-
-
-    // Add clear all location button.
-    // locationsTab.appendChild(mapp.utils.html.node`
-    //   <button 
-    //     class="tab-display bold primary-colour"
-    //     onclick=${e => {
-    //       e.preventDefault()
-    //       xyz.locations.list
-    //         .filter(record => !!record.location)
-    //         .forEach(record => record.location.remove())
-    //     }}>
-    //     ${mapp.dictionary.clear_all_locations}`)
 
 
   mapp.user = document.head.dataset.user && JSON.parse(decodeURI(document.head.dataset.user))
