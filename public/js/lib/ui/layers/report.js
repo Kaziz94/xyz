@@ -1,0 +1,38 @@
+export default (_xyz) => {
+  const report = {
+    panel
+  };
+  return report;
+  function panel(layer) {
+    if (!layer.reports)
+      return;
+    const panel2 = mapp.utils.html.node`
+    <div class="drawer panel expandable">`;
+    panel2.appendChild(mapp.utils.html.node`
+    <div
+      class="header primary-colour"
+      onclick=${(e) => {
+      e.stopPropagation();
+      mapp.ui.toggleExpanderParent(e.target, true);
+    }}><span>Reports</span><button
+      class="btn-header xyz-icon icon-expander primary-colour-filter">`);
+    Object.entries(layer.reports).forEach((entry) => {
+      const href = _xyz.host + "/view?" + mapp.utils.paramString(Object.assign(entry[1], {
+        template: entry[0],
+        locale: _xyz.locale.key,
+        layer: layer.key,
+        lat: mapp.hooks.current.lat,
+        lng: mapp.hooks.current.lng,
+        z: mapp.hooks.current.z
+      }));
+      panel2.appendChild(mapp.utils.html.node`
+      <a
+        target="_blank"
+        href="${href}"
+        class="link-with-img">
+        <div class="xyz-icon icon-event-note"></div><span>${entry[0]}`);
+    });
+    return panel2;
+  }
+  ;
+};
