@@ -169,8 +169,6 @@ window.onload = async () => {
     },
   })
 
-  mapview.interactions.highlight()
-
   // const layers = await mapview.getLayers(locale.layers)
 
   const layers = await mapp.utils.promiseAll(locale.layers.map(layer => mapp.utils.xhr(`${host}/api/workspace/get/layer?locale=${locale.key}&layer=${layer}`)))
@@ -191,6 +189,8 @@ window.onload = async () => {
     target: locationsTab,
     mapview: mapview
   })
+
+  mapview.interactions.highlight()
 
 
   // Select locations from hooks.
