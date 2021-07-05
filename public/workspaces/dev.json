@@ -371,6 +371,9 @@
           },
           "geom": "geom_3857",
           "srid": "3857",
+          "hover": {
+            "field": "rp_name"
+          },
           "style": {
             "label": {
               "display": true,
