@@ -430,66 +430,23 @@
           },
           "qID": "id",
           "infoj": [{
-            "title": "RP Type",
-            "field": "rp_type",
-            "filter": {
-              "in": [
-                "City Centre",
-                "Town Centre",
-                "Urban Centre",
-                "Parade"
-              ]
-            }
-          },
-        {
-          "field": "rp_name",
-          "title": "rp_name",
-          "filter": "like"
-        }]
-        },
-        "RP Roles": {
-          "format": "mvt",
-          "dbs": "DEV",
-          "tables": {
-            "8": null,
-            "9": "dev.uk_glx_geodata_retail_place_working"
-          },
-          "geom": "geom_3857",
-          "srid": "3857",
-          "qID": "id",
-          "filter": {
-            "infoj": [{
-              "title": "ID count",
-              "field": "id_count",
-              "type": "integer",
-              "inline": true,
-              "fieldfx": "count(id)"
-            }]
-          },
-          "roles": {
-            "en": null,
-            "test": {
-              "rp_type": {
-                "match": "City Centre"
+              "title": "RP Type",
+              "field": "rp_type",
+              "filter": {
+                "in": [
+                  "City Centre",
+                  "Town Centre",
+                  "Urban Centre",
+                  "Parade"
+                ]
               }
             },
-            "!de": {
-              "rp_type": {
-                "match": "Parade"
-              }
+            {
+              "field": "rp_name",
+              "title": "rp_name",
+              "filter": "like"
             }
-          },
-          "infoj": [{
-            "title": "RP Type",
-            "field": "rp_type",
-            "filter": {
-              "in": [
-                "City Centre",
-                "Town Centre",
-                "Urban Centre"
-              ]
-            }
-          }]
+          ]
         },
         "Retail Points HX": {
           "format": "cluster",
@@ -985,71 +942,6 @@
               }
             }
           }
-        }
-      }
-    },
-    "Japan": {
-      "name": "日本",
-      "bounds": {
-        "north": 45,
-        "east": 149,
-        "south": 30,
-        "west": 127
-      },
-      "minZoom": 6,
-      "maxZoom": 17,
-      "layers": {
-        "Mapbox Colour": {
-          "template": "Mapbox Colour",
-          "display": true
-        },
-        "restaurants_ja": {
-          "name": "レストラン",
-          "template": "japan_restaurants",
-          "display": true,
-          "roles": {
-            "ja": true
-          },
-          "infoj": [{
-              "type": "key"
-            },
-            {
-              "field": "local_name",
-              "title": "レストラン名"
-            },
-            {
-              "field": "chain_name",
-              "title": "レストランチェーン"
-            },
-            {
-              "field": "info",
-              "title": "情報"
-            }
-          ]
-        },
-        "restaurants": {
-          "name": "Restaurants",
-          "template": "japan_restaurants",
-          "display": true,
-          "roles": {
-            "!ja": null
-          },
-          "infoj": [{
-              "type": "key"
-            },
-            {
-              "field": "local_name",
-              "title": "Name"
-            },
-            {
-              "field": "chain_name",
-              "title": "Chain"
-            },
-            {
-              "field": "info",
-              "title": "Info"
-            }
-          ]
         }
       }
     }
