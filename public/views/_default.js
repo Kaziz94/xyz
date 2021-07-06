@@ -294,32 +294,33 @@ window.onload = async () => {
       <div class="xyz-icon icon-map">`)
 
     // Add gazetteer control.
-    // if (xyz.locale.gazetteer) {
+    if (mapview.locale.gazetteer) {
 
-    //   const gazetteer = document.getElementById('gazetteer')
+      const gazetteer = document.getElementById('gazetteer')
         
-    //   const btnGazetteer = btnColumn.insertBefore(mapp.utils.html.node`
-    //     <button id="btnGazetteer"
-    //       onclick=${e => {
-    //         e.preventDefault()
-    //         btnGazetteer.classList.toggle('enabled')
-    //         btnGazetteer.classList.toggle('mobile-hidden')
-    //         gazetteer.classList.toggle('display-none')
-    //         gazetteer.querySelector('input').focus()
-    //       }}><div class="xyz-icon icon-search">`, btnColumn.firstChild)
+      const btnGazetteer = btnColumn.insertBefore(mapp.utils.html.node`
+        <button id="btnGazetteer"
+          onclick=${e => {
+            e.preventDefault()
+            btnGazetteer.classList.toggle('enabled')
+            btnGazetteer.classList.toggle('mobile-hidden')
+            gazetteer.classList.toggle('display-none')
+            gazetteer.querySelector('input').focus()
+          }}><div class="xyz-icon icon-search">`, btnColumn.firstChild)
         
-    //   document.getElementById('closeGazetteer').onclick = e => {
-    //     e.preventDefault()
-    //     btnGazetteer.classList.toggle('enabled')
-    //     btnGazetteer.classList.toggle('mobile-hidden')
-    //     gazetteer.classList.toggle('display-none')
-    //   }
+      document.getElementById('closeGazetteer').onclick = e => {
+        e.preventDefault()
+        btnGazetteer.classList.toggle('enabled')
+        btnGazetteer.classList.toggle('mobile-hidden')
+        gazetteer.classList.toggle('display-none')
+      }
           
-    //   xyz.gazetteer.init({
-    //     group: gazetteer.querySelector('.input-drop')
-    //   })
+      mapp.gazetteer({
+        mapview: mapview,
+        group: gazetteer.querySelector('.input-drop')
+      })
           
-    // }
+    }
 
 
   mapp.user = document.head.dataset.user && JSON.parse(decodeURI(document.head.dataset.user))
