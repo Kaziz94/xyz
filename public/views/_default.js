@@ -269,29 +269,29 @@ window.onload = async () => {
       <div class="xyz-icon icon-pageview">`)
 
   // Add locator button.
-  // btnColumn.appendChild(mapp.utils.html.node`
-  //   <button
-  //     title=${mapp.dictionary.toolbar_current_location}
-  //     onclick=${e => {
-  //       xyz.mapview.locate.toggle();
-  //       e.target.classList.toggle('enabled');
-  //     }}>
-  //     <div class="xyz-icon icon-gps-not-fixed">`)
+  btnColumn.appendChild(mapp.utils.html.node`
+    <button
+      title=${mapp.dictionary.toolbar_current_location}
+      onclick=${e => {
+        mapview.locate.toggle()
+        e.target.classList.toggle('enabled')
+      }}>
+      <div class="xyz-icon icon-gps-not-fixed">`)
 
   // Add fullscreen button.
-  // btnColumn.appendChild(mapp.utils.html.node`
-  //   <button
-  //     class="mobile-display-none"
-  //     title=${mapp.dictionary.toolbar_fullscreen}
-  //     onclick=${e => {
-  //       e.target.classList.toggle('enabled')
-  //       document.body.classList.toggle('fullscreen')
-  //       xyz.map.updateSize()
-  //       Object.values(xyz.layers.list).forEach(layer => {
-  //         layer.mbMap?.resize()
-  //       })
-  //     }}>
-  //     <div class="xyz-icon icon-map">`)
+  btnColumn.appendChild(mapp.utils.html.node`
+    <button
+      class="mobile-display-none"
+      title=${mapp.dictionary.toolbar_fullscreen}
+      onclick=${e => {
+        e.target.classList.toggle('enabled')
+        document.body.classList.toggle('fullscreen')
+        mapview.Map.updateSize()
+        Object.values(mapview.layers.list).forEach(layer => {
+          layer.mbMap?.resize()
+        })
+      }}>
+      <div class="xyz-icon icon-map">`)
 
     // Add gazetteer control.
     // if (xyz.locale.gazetteer) {
