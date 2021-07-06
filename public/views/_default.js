@@ -206,10 +206,11 @@ window.onload = async () => {
     })
   })
 
-  mapp.ui.tabview({
+  mapview.tabview = mapp.ui.tabview({
     target: document.getElementById('tabview'),
     mapview: mapview
   })
+
 
   // Add zoomIn button.
   const btnZoomIn = btnColumn.appendChild(mapp.utils.html.node `
@@ -244,27 +245,28 @@ window.onload = async () => {
 
 
   // Add zoom to area button.
-  // btnColumn.appendChild(mapp.utils.html.node`
-  //   <button
-  //     class="mobile-display-none"
-  //     title=${mapp.dictionary.toolbar_zoom_to_area}
-  //     onclick=${e => {
-  //       e.stopPropagation()
-  //       e.target.classList.toggle('enabled')
+  btnColumn.appendChild(mapp.utils.html.node`
+    <button
+      class="mobile-display-none"
+      title=${mapp.dictionary.toolbar_zoom_to_area}
+      onclick=${e => {
+        e.stopPropagation()
+        e.target.classList.toggle('enabled')
 
-  //       if (e.target.classList.contains('enabled')) {
+        if (e.target.classList.contains('enabled')) {
 
-  //         return xyz.mapview.interaction.zoom.begin({
-  //           callback: () => {
-  //             e.target.classList.remove('enabled')
-  //           }
-  //         })
-  //       }
+          return mapview.interactions.zoom({
+            callback: () => {
+              e.target.classList.remove('enabled')
+              mapview.interactions.highlight()
+            }
+          })
+        }
 
-  //       xyz.mapview.interaction.zoom.cancel()
+        mapview.interactions.highlight()
 
-  //     }}>
-  //     <div class="xyz-icon icon-pageview">`)
+      }}>
+      <div class="xyz-icon icon-pageview">`)
 
   // Add locator button.
   // btnColumn.appendChild(mapp.utils.html.node`
