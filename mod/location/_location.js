@@ -3,6 +3,7 @@ const _method = {
   get: require('./get'),
   update: require('./update'),
   delete: require('./delete'),
+  getall: require('./getall'),
 }
 
 module.exports = async (req, res) => {
