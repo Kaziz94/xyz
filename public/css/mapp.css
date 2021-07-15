@@ -2029,7 +2029,8 @@ span.flatpickr-weekday {
   background-color: salmon; }
 
 .ol-scale-line {
-  position: static; }
+  position: static;
+  background: none; }
 
 .ol-scale-line-inner {
   border: 2px solid #222;
