@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
     .filter(entry => entry.field)
     .map(entry => `(${entry.fieldfx || entry.field}) AS ${entry.field}`)
 
-  !req.params.fields && fields.push(`ST_asGeoJson(${layer.geom}, 4) AS geomj`)
+  !req.params.fields && fields.push(`ST_asGeoJson(${layer.geom}, 4) AS geomj`) && fields.push(`ogc_fid AS id`)
 
   var q = `
   SELECT
